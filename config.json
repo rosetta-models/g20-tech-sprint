@@ -10,18 +10,16 @@
   "dependencyArtifact": {
     "groupId": "com.regnosys",
     "artifactId": "core-cdm-dependencies",
-    "version": "2.55.5"
+    "version": "2.58.3"
   },
   "modelArtifacts": [
     {
       "groupId": "com.regnosys.g20-tech-sprint",
-      "artifactId": "rosetta-source",
-      "version": "0.0.13"
+      "artifactId": "rosetta-source"
     },
     {
       "groupId": "com.regnosys.g20-tech-sprint",
-      "artifactId": "lib",
-      "version": "0.0.13"
+      "artifactId": "lib"
     }
   ]
 }
