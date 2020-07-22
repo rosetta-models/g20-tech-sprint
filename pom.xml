@@ -19,9 +19,9 @@
         <java.version>11</java.version>
         <maven-compiler-plugin.version>3.8.0</maven-compiler-plugin.version>
         <maven-surefire-plugin.version>2.22.1</maven-surefire-plugin.version>
-        <rosetta.dsl.version>2.58.3</rosetta.dsl.version>
-        <rosetta.translate.version>2.58.3</rosetta.translate.version>
-        <rosetta-ingest.version>2.58.3</rosetta-ingest.version>
+        <rosetta.dsl.version>2.60.0</rosetta.dsl.version>
+        <rosetta.translate.version>2.60.0</rosetta.translate.version>
+        <rosetta-ingest.version>2.60.0</rosetta-ingest.version>
     </properties>
 
     <build>
