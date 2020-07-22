@@ -7,11 +7,10 @@
   "parent": "cdm",
   "parentReadOnly": true,
   "lowestVersion": "0.0.13",
-  "upmostVersion": "0.0.13",
   "dependencyArtifact": {
     "groupId": "com.regnosys",
     "artifactId": "core-cdm-dependencies",
-    "version": "2.59.1"
+    "version": "2.60.0"
   },
   "modelArtifacts": [
     {
