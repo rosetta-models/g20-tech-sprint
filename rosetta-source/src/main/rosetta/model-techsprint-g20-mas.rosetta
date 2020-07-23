@@ -1,3 +1,28 @@
 namespace cdm.techsprint.g20.mas
 
 import org.isda.cdm.*
+
+// https://www.mas.gov.sg/
+body Authority MAS <"The Monetary Authority of Singapore (MAS) is Singapore’s central bank and integrated financial regulator. MAS also works with the financial industry to develop Singapore as a dynamic international financial centre.">
+
+// https://sso.agc.gov.sg/Act/SFA2001
+corpus Act "289" SFA <"The Securities And Futures Act relates to the regulation of activities and institutions in the securities and derivatives industry, including leveraged foreign exchange trading, of financial benchmarks and of clearing facilities, and for matters connected therewith.">
+
+// https://sso.agc.gov.sg/SL/SFA2001-S668-2013
+corpus Regulations "SFA2001-S668-2013" MAS_2013 <"The Securities And Futures (Reporting Of Derivatives Contracts) Regulations 2013 contain Regulations setting out reporting requirements for OTC counterparties for OTC derivatives.">
+
+corpus FAQ "13May2020|FAQ" FAQ <"These FAQs are to aid implementation of the reporting obligations and elaborate on MAS’ intent for some of the requirements set out under the SF(RDC)R.">
+
+report MAS SFA MAS_2013 in T+2
+when BookedInSingapore
+with fields 
+    UniqueTransactionIdentifier
+
+eligibility rule BookedInSingapore
+    // Dummy Rule
+     filter when WorkflowStep -> messageInformation -> messageId exists
+
+
+reporting rule UniqueTransactionIdentifier
+    // Dummy Rule
+    return "12345" as "UTI"
