@@ -1,28 +1,28 @@
 [
   {
-    "dataSetName": "Digital Regulatory Reporting",
+    "dataSetName": "G20 MAS",
     "inputType": "org.isda.cdm.WorkflowStep",
-    "applicableReports": "*",
+    "applicableReports": ["cdm.techsprint.g20.mas.blueprint.MASSFA_MAS_2013Report"],
     "data": [
       {
-        "name": "Inception event for IRS in EU is reportable",
-        "input": "use-case-1.json"
+        "name": "Use case 1",
+        "input": "mas-use-case-1.json"
       },
       {
-        "name": "Swiss investment firm with GB branch is reportable under MiFIR",
-        "input": "use-case-2.json"
+        "name": "Use case 2",
+        "input": "mas-use-case-2.json"
       },
       {
-        "name": "Fixed-Float swap payer is reported at Buyer",
-        "input": "use-case-3.json"
+        "name": "Use case 3",
+        "input": "mas-use-case-3.json"
       },
       {
-        "name": "CDS with quantity change is reported",
-        "input": "use-case-4.json"
+        "name": "Use case 4",
+        "input": "mas-use-case-4.json"
       },
       {
-        "name": "Norwegian investment firm reportable under EMIR",
-        "input": "use-case-5.json"
+        "name": "Use case 5",
+        "input": "mas-use-case-5.json"
       }
     ]
   }
