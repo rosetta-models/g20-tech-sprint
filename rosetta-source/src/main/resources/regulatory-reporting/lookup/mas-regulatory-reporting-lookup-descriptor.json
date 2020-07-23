@@ -5,7 +5,7 @@
     "valueType": "java.lang.Boolean",
     "data": [
       {
-        "key": "*",
+        "key": "cdm.techsprint.g20.mas.blueprint.MASSFA_MAS_2013Report",
         "value": true
       }
     ]
