@@ -5,7 +5,7 @@
   "modelPath": "rosetta-source/src/main",
   "permissions": ["g20_tech_sprint_user"],
   "parent": "cdm",
-  "parentReadOnly": true,
+  "parentReadOnly": false,
   "lowestVersion": "0.0.13",
   "dependencyArtifact": {
     "groupId": "com.regnosys",
