@@ -608,7 +608,7 @@
       "assignedIdentifier": [
         {
           "identifier": {
-            "value": "sw-17625"
+            "value": "GUAMON5OX2SW-17625"
           },
           "version": 1
         }
@@ -633,7 +633,7 @@
       },
       "partyId": [
         {
-          "value": "Party 1",
+          "value": "549300GUAMON5OX2OO54",
           "meta": {
             "scheme": "http://www.fpml.org/coding-scheme/external"
           }
@@ -647,7 +647,7 @@
       },
       "partyId": [
         {
-          "value": "Party 2",
+          "value": "EYKN6V0ZCB8VD9IULB80",
           "meta": {
             "scheme": "http://www.fpml.org/coding-scheme/external"
           }
