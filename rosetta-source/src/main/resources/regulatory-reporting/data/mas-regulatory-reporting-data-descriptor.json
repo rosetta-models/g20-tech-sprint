@@ -23,7 +23,11 @@
       {
         "name": "Use case 5",
         "input": "mas-use-case-5.json"
-      }
+      },
+      {
+        "name": "Use case 6",
+        "input": "mas-use-case-6.json"
+      }      
     ]
   }
 ]
