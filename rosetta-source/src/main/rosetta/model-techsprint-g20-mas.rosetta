@@ -26,6 +26,7 @@ when BookedInSingapore
 with fields 
     UniqueTransactionIdentifier
     UniqueProductIdentifier
+    // PriorUniqueTransactionIdentifier
     Counterparty1
     Counterparty2
     ReportingEntity
@@ -36,6 +37,10 @@ with fields
     OptionType
     OptionExpirationDate
     OptionPremium
+    InterestRateNotionalCurrencyLeg1
+    InterestRateNotionalCurrencyLeg2
+    InterestRateRateLeg1
+    // InterestRateRateLeg2
     InterestRatePaymentFrequencyPeriodLeg1
     InterestRatePaymentFrequencyMultiplierLeg1
     InterestRatePaymentFrequencyPeriodLeg2
@@ -46,6 +51,7 @@ with fields
     InterestRateResetFrequencyMultiplierLeg1
     InterestRateResetFrequencyPeriodLeg2
     InterestRateResetFrequencyMultiplierLeg2
+    InterestRatePrice
 
 eligibility rule BookedInSingapore
     // Dummy Rule
@@ -70,21 +76,44 @@ reporting rule IsFixedFloat
 
 reporting rule FixedFloatLeg1 <"Fixed Float Leg 1">
     [regulatoryReference MAS SFA MAS_2013 annex "1" table "II"
-    provision "Fixed Float Leg 1 is the fixed leg"]
+		rationale_author "DRR"
+		rationale "In case of fixed float swaps leg 1 is the fixed rate."
+		structured_provision "Leg 1 of a Fixed Float swap is by definition the Fixed leg"
+		provision ""]
     ContractForEvent then
 	filter when rule IsFixedFloat then
 	extract multiple Contract->tradableProduct -> product -> contractualProduct -> economicTerms -> payout then
 	filter when Payout -> interestRatePayout -> rateSpecification -> fixedRate exists then
 	extract multiple Payout -> interestRatePayout
 
+reporting rule FixedFloatRateLeg1 <"Fixed Float Price">
+    [regulatoryReference MAS SFA MAS_2013 annex "1" table "II" field "1.9"
+    provision "The rate used in leg 1, where applicable. Field value: Any valid number."]
+    filter when rule IsInterestRatePayout then
+    ContractForEvent then
+    extract Contract -> tradableProduct -> priceNotation -> price -> fixedInterestRate -> rate as "II.1.9 Rate leg 1"
+
 reporting rule FixedFloatLeg2 <"Fixed Float Leg 1">
     [regulatoryReference MAS SFA MAS_2013 annex "1" table "II"
-    provision "Fixed Float Leg 2 is the float leg"]
+		rationale_author "DRR"
+		rationale "In case of fixed float swaps leg 2 is the floating rate."
+		structured_provision "Leg 2 of a Fixed Float swap is by definition the Floating leg"
+		provision ""]
     ContractForEvent then
 	filter when rule IsFixedFloat then
 	extract multiple Contract->tradableProduct -> product -> contractualProduct -> economicTerms -> payout then
 	filter when Payout -> interestRatePayout -> rateSpecification -> floatingRate exists then
 	extract multiple Payout -> interestRatePayout
+
+reporting rule FixedFloatRateLeg2
+    [regulatoryReference MAS SFA MAS_2013 annex "1" table "II" field "1.10"
+		rationale_author "DRR"
+		rationale "In case of fixed float the Price is the initial floating rate."
+		structured_provision "The Price of a Fixed Float swap is by definition the Floating leg"
+		provision "The rate used in leg 2, where applicable. Field value: Any valid number."]
+    filter when rule IsInterestRatePayout then
+    ContractForEvent then
+    extract Contract -> tradableProduct -> priceNotation -> price -> floatingInterestRate -> initialRate as "II.1.21 Price/spread"
 
 reporting rule IsFixedFixed
 	extract Contract -> tradableProduct -> product -> contractualProduct -> economicTerms -> payout -> interestRatePayout -> rateSpecification -> fixedRate count = 2
@@ -107,11 +136,22 @@ reporting rule UniqueProductIdentifier <"Unique product identifier (UPI)">
 	ContractForEvent then
 		extract Contract -> tradableProduct -> product -> contractualProduct -> productIdentification -> productQualifier as "I.1.2 UPI"
 
+//TODO fix bug and then add back in
 // reporting rule PriorUniqueTransactionIdentifier <"Previous UTI (where applicable)">
 //     [regulatoryReference MAS SFA MAS_2013 annex "1" table "I" field "1.3"
 //     provision "To denote the previous UTI relating to this contract. Field value: Alphanumeric string."]
-// 	ContractForEvent then
-// 		extract Contract -> tradableProduct -> product -> contractualProduct -> productIdentification -> productQualifier as "I.1.3 Previous UTI"    
+//     PriorVersion then
+//     extract Contract -> contractIdentifier -> assignedIdentifier -> identifier
+//     as "I.1.3 Prior UTI"
+
+// reporting rule PriorVersion
+//  	extract
+//         if WorkflowStep -> businessEvent -> primitives -> quantityChange -> before -> contract  exists
+// 		then WorkflowStep -> businessEvent -> primitives -> quantityChange -> before -> contract
+// 	else if WorkflowStep -> businessEvent -> primitives -> termsChange -> before -> contract  exists
+// 		then WorkflowStep -> businessEvent -> primitives -> termsChange -> before -> contract
+// 	    else WorkflowStep -> businessEvent -> primitives -> quantityChange -> before -> contract
+//  	as "Contract3"
 
 reporting rule Counterparty1 <"Identifier of reporting entity">
     [regulatoryReference MAS SFA MAS_2013 annex "1" table "I" field "2.1"
@@ -207,13 +247,13 @@ reporting rule OptionPremium <"Option premium">
 //     ContractForEvent then
 //     extract Contract -> tradableProduct -> quantityNotation -> quantity as "II.1.1 Notional amount leg 1"
 
-// //how to associate the right quantity/price/currency with the right leg?
-// reporting rule InterestRateNotionalCurrencyLeg1 <"Notional currency for leg 1">
-//     [regulatoryReference MAS SFA MAS_2013 annex "1" table "II" field "1.2"
-//     provision "The notional currency of leg 1 of the contract. Field value: Any valid number."]
-//     filter when rule IsInterestRatePayout then
-//     ContractForEvent then
-//     extract multiple Contract -> tradableProduct -> quantityNotation -> quantity as "II.1.2 Notional currency leg 1"
+//how to associate the right quantity/price/currency with the right leg?
+reporting rule InterestRateNotionalCurrencyLeg1 <"Notional currency for leg 1">
+    [regulatoryReference MAS SFA MAS_2013 annex "1" table "II" field "1.2"
+    provision "The notional currency of leg 1 of the contract. Field value: Any valid number."]
+    FixedFloatLeg1 then
+	filter when InterestRatePayout -> rateSpecification -> fixedRate exists then
+	extract InterestRatePayout -> payoutQuantity -> assetIdentifier -> currency as "II.1.2 Notional currency leg 1"
 
 // reporting rule InterestRateNotionalAmountLeg2 <"Notional amount for leg 2">
 //     [regulatoryReference MAS SFA MAS_2013 annex "1" table "II" field "1.3"
@@ -222,12 +262,26 @@ reporting rule OptionPremium <"Option premium">
 //     ContractForEvent then
 //     extract Contract -> tradableProduct -> quantityNotation -> quantity as "II.1.3 Notional amount leg 2"
 
-// reporting rule InterestRateNotionalCurrencyLeg2 <"Notional currency for leg 2">
-//     [regulatoryReference MAS SFA MAS_2013 annex "1" table "II" field "1.4"
-//     provision "The notional currency of leg 2 of the contract. Field value: Any valid number."]
+reporting rule InterestRateNotionalCurrencyLeg2 <"Notional currency for leg 2">
+    [regulatoryReference MAS SFA MAS_2013 annex "1" table "II" field "1.4"
+    provision "The notional currency of leg 2 of the contract. Field value: Any valid number."]
+    FixedFloatLeg2 then
+	filter when InterestRatePayout -> rateSpecification -> floatingRate exists then
+	extract InterestRatePayout -> payoutQuantity -> assetIdentifier -> currency as "II.1.4 Notional currency leg 2"
+
+// reporting rule InterestRatePaymentAmount <"Amount of upfront payment (where applicable)">
+//     [regulatoryReference MAS SFA MAS_2013 annex "1" table "II" field "1.5"
+//     provision "The amount of any upfront payment counterparty 1 made or received. Field value: Any valid number."]
 //     filter when rule IsInterestRatePayout then
 //     ContractForEvent then
-//     extract multiple Contract -> tradableProduct -> quantityNotation -> quantity as "II.1.4 Notional currency leg 2"
+//     extract Contract -> tradableProduct -> quantityNotation -> quantity as "II.1.5 Amount of upfront payment"
+
+// reporting rule InterestRatePaymentCurrency <"Currency/currencies in which upfront payment is expressed (where applicable)">
+//     [regulatoryReference MAS SFA MAS_2013 annex "1" table "II" field "1.6"
+//     provision "The currency/currencies in which the upfront payment is expressed. Field value: ISO currency code."]
+//     filter when rule IsInterestRatePayout then
+//     ContractForEvent then
+//     extract multiple Contract -> tradableProduct -> quantityNotation -> quantity as "II.1.6 Currency of upfront payment"
 
 // reporting rule InterestRatePayerLeg1 <"Payer of leg 1">
 //     [regulatoryReference MAS SFA MAS_2013 annex "1" table "II" field "1.7"
@@ -243,24 +297,21 @@ reporting rule OptionPremium <"Option premium">
 //     ContractForEvent then
 //     extract multiple Contract -> tradableProduct -> quantityNotation -> quantity as "II.1.8 Payer leg 2"
 
-// reporting rule InterestRateRateLeg1 <"Rate of leg 1">
-//     [regulatoryReference MAS SFA MAS_2013 annex "1" table "II" field "1.9"
-//     provision "The rate used in leg 1, where applicable. Field value: Any valid number."]
-//     filter when rule IsInterestRatePayout then
-//     ContractForEvent then
-//     extract Contract -> tradableProduct -> quantityNotation -> quantity as "II.1.9 Rate leg 1"
+reporting rule InterestRateRateLeg1 <"Rate of leg 1">
+    [regulatoryReference MAS SFA MAS_2013 annex "1" table "II" field "1.9"
+    provision "The rate used in leg 1, where applicable. Field value: Any valid number."]
+    FixedFloatRateLeg1
 
 // reporting rule InterestRateRateLeg2 <"Rate of leg 2">
 //     [regulatoryReference MAS SFA MAS_2013 annex "1" table "II" field "1.10"
 //     provision "The rate used in leg 2, where applicable. Field value: Any valid number."]
-//     filter when rule IsInterestRatePayout then
-//     ContractForEvent then
-//     extract multiple Contract -> tradableProduct -> quantityNotation -> quantity as "II.1.10 Rate leg 2"
+//     FixedFloatRateLeg2
 
 reporting rule InterestRatePaymentFrequencyPeriodLeg1 <"Payment frequency period of leg 1 (where applicable)">
     [regulatoryReference MAS SFA MAS_2013 annex "1" table "II" field "1.11"
     provision "The frequency period of payments for leg 1. Field value: D (day), M (month), W (week), Y (year) or T (term)."]
     FixedFloatLeg1 then
+	filter when InterestRatePayout -> rateSpecification -> fixedRate exists then
 	extract InterestRatePayout -> paymentDates -> paymentFrequency -> period as "II.1.11 Payment frequency period leg 1"
 
 reporting rule InterestRatePaymentFrequencyMultiplierLeg1 <"Payment frequency multiplier of leg 1 (where applicable)">
@@ -268,6 +319,7 @@ reporting rule InterestRatePaymentFrequencyMultiplierLeg1 <"Payment frequency mu
     provision "An integer number of the payment frequency period of leg 2. Field value: Any valid number."]
     filter when rule IsInterestRatePayout then
     FixedFloatLeg1 then
+	filter when InterestRatePayout -> rateSpecification -> fixedRate exists then
 	extract InterestRatePayout -> paymentDates -> paymentFrequency -> periodMultiplier as "II.1.12 Payment frequency multiplier leg 1"
 
 reporting rule InterestRatePaymentFrequencyPeriodLeg2 <"Payment frequency period of leg 2 (where applicable)">
@@ -275,6 +327,7 @@ reporting rule InterestRatePaymentFrequencyPeriodLeg2 <"Payment frequency period
     provision "The frequency period of payments for leg 2. Field value: D (day), M (month), W (week), Y (year) or T (term)."]
     filter when rule IsInterestRatePayout then
     FixedFloatLeg2 then
+	filter when InterestRatePayout -> rateSpecification -> floatingRate exists then
 	extract InterestRatePayout -> paymentDates -> paymentFrequency -> period as "II.1.13 Payment frequency period leg 2"
 
 reporting rule InterestRatePaymentFrequencyMultiplierLeg2 <"Payment frequency multiplier of leg 2 (where applicable)">
@@ -282,18 +335,21 @@ reporting rule InterestRatePaymentFrequencyMultiplierLeg2 <"Payment frequency mu
     provision "An integer number of the payment frequency period of leg 2. Field value: Any valid number."]
     filter when rule IsInterestRatePayout then
     FixedFloatLeg2 then
+	filter when InterestRatePayout -> rateSpecification -> floatingRate exists then
 	extract InterestRatePayout -> paymentDates -> paymentFrequency -> periodMultiplier as "II.1.14 Payment frequency multiplier leg 2"
 
 reporting rule InterestRateDayCountLeg1 <"Day count of leg 1 (where applicable)">
     [regulatoryReference MAS SFA MAS_2013 annex "1" table "II" field "1.15"
     provision "The actual number of days in the calculation period for leg 1. Field value: “1/1”, “30/360”, “30E/360.ISDA”, “30E/360”, “ACT/360”, “ACT/365.FIXED”, “ACT/365L”, “ACT/ACT.AFB”, “ACT/ACT.ICMA”, “ACT/ACT.ISDA”, “ACT/ACT.ISMA”, “BUS/252” or “Other”."]
     FixedFloatLeg1 then
+	filter when InterestRatePayout -> rateSpecification -> fixedRate exists then
 	extract InterestRatePayout -> dayCountFraction as "II.1.15 Day count leg 1"
 
 reporting rule InterestRateDayCountLeg2 <"Day count of leg 2 (where applicable)">
     [regulatoryReference MAS SFA MAS_2013 annex "1" table "II" field "1.16"
     provision "The actual number of days in the calculation period for leg 1. Field value: “1/1”, “30/360”, “30E/360.ISDA”, “30E/360”, “ACT/360”, “ACT/365.FIXED”, “ACT/365L”, “ACT/ACT.AFB”, “ACT/ACT.ICMA”, “ACT/ACT.ISDA”, “ACT/ACT.ISMA”, “BUS/252” or “Other”."]
     FixedFloatLeg2 then
+	filter when InterestRatePayout -> rateSpecification -> floatingRate exists then
 	extract InterestRatePayout -> dayCountFraction as "II.1.16 Day count leg 2"
 
 reporting rule InterestRateResetFrequencyPeriodLeg1 <"Reset frequency period of leg 1 (where applicable)">
@@ -301,6 +357,7 @@ reporting rule InterestRateResetFrequencyPeriodLeg1 <"Reset frequency period of 
     provision "The frequency period of resets for leg 1. Field value: D (day), M (month), W (week), Y (year) or T (term)."]
     filter when rule IsInterestRatePayout then
     FixedFloatLeg1 then
+	filter when InterestRatePayout -> rateSpecification -> fixedRate exists then
 	extract InterestRatePayout -> calculationPeriodDates -> calculationPeriodFrequency -> period as "II.1.17 Reset frequency period leg 1"
 
 reporting rule InterestRateResetFrequencyMultiplierLeg1 <"Reset frequency multiplier of leg 1 (where applicable)">
@@ -308,6 +365,7 @@ reporting rule InterestRateResetFrequencyMultiplierLeg1 <"Reset frequency multip
     provision "An integer number of the reset frequency period of leg 1. Field value: Any valid number."]
     filter when rule IsInterestRatePayout then
     FixedFloatLeg1 then
+	filter when InterestRatePayout -> rateSpecification -> fixedRate exists then
 	extract InterestRatePayout -> calculationPeriodDates -> calculationPeriodFrequency -> periodMultiplier as "II.1.18 Reset frequency multiplier leg 1"
 
 reporting rule InterestRateResetFrequencyPeriodLeg2 <"Reset frequency period of leg 2 (where applicable)">
@@ -315,6 +373,7 @@ reporting rule InterestRateResetFrequencyPeriodLeg2 <"Reset frequency period of 
     provision "The frequency period of resets for leg 2. Field value: D (day), M (month), W (week), Y (year) or T (term)."]
     filter when rule IsInterestRatePayout then
     FixedFloatLeg2 then
+	filter when InterestRatePayout -> rateSpecification -> floatingRate exists then
 	extract InterestRatePayout -> calculationPeriodDates -> calculationPeriodFrequency -> period as "II.1.19 Reset frequency period leg 2"
 
 reporting rule InterestRateResetFrequencyMultiplierLeg2 <"Reset frequency multiplier of leg 2 (where applicable)">
@@ -322,8 +381,10 @@ reporting rule InterestRateResetFrequencyMultiplierLeg2 <"Reset frequency multip
     provision "An integer number of the reset frequency period of leg 2. Field value: Any valid number."]
     filter when rule IsInterestRatePayout then
     FixedFloatLeg2 then
+	filter when InterestRatePayout -> rateSpecification -> floatingRate exists then
 	extract InterestRatePayout -> calculationPeriodDates -> calculationPeriodFrequency -> periodMultiplier as "II.1.20 Reset frequency multiplier leg 2"
 
-// reporting rule InterestRatePrice <"Price/spread (where applicable)">
-//     [regulatoryReference MAS SFA MAS_2013 annex "1" table "II" field "1.21"
-//     provision "Transacted price/spread. Field value: Any valid number."]
+reporting rule InterestRatePrice <"Price/spread (where applicable)">
+    [regulatoryReference MAS SFA MAS_2013 annex "1" table "II" field "1.21"
+    provision "Transacted price/spread. Field value: Any valid number."]
+    FixedFloatRateLeg2
