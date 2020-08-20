@@ -150,7 +150,7 @@ reporting rule FixedFloatRateLeg2
 		provision "The rate used in leg 2, where applicable. Field value: Any valid number."]
     filter when rule IsInterestRatePayout then
     ContractForEvent then
-    extract Contract -> tradableProduct -> priceNotation -> price -> floatingInterestRate -> initialRate as "II.1.21 Price/spread"
+    extract Contract -> tradableProduct -> product -> contractualProduct -> economicTerms -> payout -> interestRatePayout -> rateSpecification -> floatingRate -> assetIdentifier -> rateOption -> floatingRateIndex as "II.1.10 Rate of leg 2"
 
 reporting rule IsFixedFixed
 	extract Contract -> tradableProduct -> product -> contractualProduct -> economicTerms -> payout -> interestRatePayout -> rateSpecification -> fixedRate count = 2
@@ -436,7 +436,9 @@ reporting rule InterestRateResetFrequencyMultiplierLeg2 <"Reset frequency multip
 reporting rule InterestRatePrice <"Price/spread (where applicable)">
     [regulatoryReference MAS SFA MAS_2013 annex "1" table "II" field "1.21"
     provision "Transacted price/spread. Field value: Any valid number."]
-    FixedFloatRateLeg2
+    filter when rule IsInterestRatePayout then
+    ContractForEvent then
+    extract Contract -> tradableProduct -> priceNotation -> price -> floatingInterestRate -> spread as "II.1.21 Price/spread"
 
 // reporting rule FXNotionalAmount1 <"Notional amount 1">
 //     [regulatoryReference MAS SFA MAS_2013 annex "1" table "IV" field "1.1"
