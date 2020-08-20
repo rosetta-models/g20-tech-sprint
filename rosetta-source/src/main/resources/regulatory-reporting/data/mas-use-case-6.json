@@ -608,7 +608,7 @@
       "externalKey" : "p1"
     },
     "partyId" : [ {
-      "value" : "Party1",
+      "value" : "EYKN6V0ZCB8VD9IULB80",
       "meta" : {
         "scheme" : "http://www.fpml.org/coding-scheme/external/iso17442"
       }
@@ -619,7 +619,7 @@
       "externalKey" : "p2"
     },
     "partyId" : [ {
-      "value" : "Party2",
+      "value" : "54930084UKLVMY22DS16",
       "meta" : {
         "scheme" : "http://www.fpml.org/coding-scheme/external/iso17442"
       }
@@ -630,7 +630,7 @@
       "externalKey" : "p3"
     },
     "partyId" : [ {
-      "value" : "Party3",
+      "value" : "48750084UKLVTR22DS78",
       "meta" : {
         "scheme" : "http://www.fpml.org/coding-scheme/external/iso17442"
       }
