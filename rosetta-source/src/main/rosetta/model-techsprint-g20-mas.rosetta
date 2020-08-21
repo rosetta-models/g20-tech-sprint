@@ -293,7 +293,7 @@ reporting rule InterestRateNotionalAmountLeg1 <"Notional amount for leg 1">
     provision "The notional amount of leg 1 of the contract. Field value: Any valid number."]
     FixedFloatLeg1 then
     filter when InterestRatePayout -> rateSpecification -> fixedRate exists then
-    extract InterestRatePayout -> payoutQuantity -> quantityReference -> resolvedQuantity -> amount  as "II.1.1 Notional amount leg 1"
+    extract InterestRatePayout -> payoutQuantity -> resolvedQuantity -> amount  as "II.1.1 Notional amount leg 1"
 
 //how to associate the right quantity/price/currency with the right leg?
 reporting rule InterestRateNotionalCurrencyLeg1 <"Notional currency for leg 1">
@@ -308,7 +308,7 @@ reporting rule InterestRateNotionalAmountLeg2 <"Notional amount for leg 2">
     provision "The notional amount of leg 2 of the contract. Field value: Any valid number."]
     FixedFloatLeg2 then
 	filter when InterestRatePayout -> rateSpecification -> floatingRate exists then
-	extract InterestRatePayout -> payoutQuantity -> quantityReference -> resolvedQuantity -> amount as "II.1.3 Notional amount leg 2"    
+	extract InterestRatePayout -> payoutQuantity -> resolvedQuantity -> amount as "II.1.3 Notional amount leg 2"    
 
 reporting rule InterestRateNotionalCurrencyLeg2 <"Notional currency for leg 2">
     [regulatoryReference MAS SFA MAS_2013 annex "1" table "II" field "1.4"
