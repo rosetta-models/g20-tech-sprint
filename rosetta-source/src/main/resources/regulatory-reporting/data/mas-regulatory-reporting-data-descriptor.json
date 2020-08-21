@@ -5,35 +5,35 @@
     "applicableReports": ["cdm.techsprint.g20.mas.blueprint.MASSFA_MAS_2013Report"],
     "data": [
       {
-        "name": "Use case 1",
+        "name": "New Vanilla Interest Rate Swap Trade - No Floating Rate Spread",
         "input": "mas-use-case-1.json"
       },
       {
-        "name": "Use case 2",
+        "name": "New Zero Coupon Interest Rate Swap Trade - No Floating Rate Spread",
         "input": "mas-use-case-2.json"
       },
       {
-        "name": "Use case 3",
+        "name": "New Zero Coupon Interest Rate Swap Trade - with Floating Rate Spread",
         "input": "mas-use-case-3.json"
       },
       {
-        "name": "Use case 4",
+        "name": "Upsize Credit Default Swap Trade",
         "input": "mas-use-case-4.json"
       },
       {
-        "name": "Use case 5",
+        "name": "New Zero Coupon Interest Rate Swap Trade - with Floating Rate Spread",
         "input": "mas-use-case-5.json"
       },
       {
-        "name": "Use case 6",
+        "name": "Novation Credit Default Swap Trade",
         "input": "mas-use-case-6.json"
       },
       {
-        "name": "Use case 7",
+        "name": "New FX Forward",
         "input": "mas-use-case-7.json"
       },
       {
-        "name": "Use case 8",
+        "name": "New Non-Deliverable Forward",
         "input": "mas-use-case-8.json"
       }    
     ]
