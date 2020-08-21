@@ -21,10 +21,6 @@
         "input": "mas-use-case-4.json"
       },
       {
-        "name": "New Zero Coupon Interest Rate Swap Trade - with Floating Rate Spread",
-        "input": "mas-use-case-5.json"
-      },
-      {
         "name": "Novation Credit Default Swap Trade",
         "input": "mas-use-case-6.json"
       },
