@@ -60,10 +60,10 @@ with fields
     InterestRateResetFrequencyMultiplierLeg2
     InterestRatePrice
     // FXNotionalAmount1
-    // FXCurrency1
+    FXCurrency1
     // FXNotionalAmount2
-    // FXCurrency2
-    // FXExchangeRate
+    FXCurrency2
+    FXExchangeRate
 
 eligibility rule Nexus
     // Dummy Rule
@@ -161,6 +161,10 @@ reporting rule IsIRSwapBasis
 reporting rule IsCreditDefaultPayout
     ContractForEvent then
     extract Contract -> tradableProduct -> product -> contractualProduct -> economicTerms -> payout -> creditDefaultPayout exists
+
+reporting rule IsFxPayout
+    ContractForEvent then
+    extract Contract -> tradableProduct -> product -> contractualProduct -> economicTerms -> payout -> forwardPayout only exists
      
 reporting rule UniqueTransactionIdentifier <"Unique transaction identifier (UTI)">
     [regulatoryReference MAS SFA MAS_2013 annex "1" table "I" field "1.1"
@@ -443,33 +447,34 @@ reporting rule InterestRatePrice <"Price/spread (where applicable)">
 // reporting rule FXNotionalAmount1 <"Notional amount 1">
 //     [regulatoryReference MAS SFA MAS_2013 annex "1" table "IV" field "1.1"
 //     provision "The notional amount of the first underlying currency. Field value: Any valid number."]
-//     filter when rule IsInterestRatePayout then
+//     filter when rule IsFxPayout then
 //     ContractForEvent then
-//     extract multiple Contract -> tradableProduct -> quantityNotation -> quantity as "IV.1.1 Notional amount leg 1"
+//     extract multiple Contract -> tradableProduct -> quantityNotation -> quantity1 as "IV.1.1 Notional amount 1"
 
-// reporting rule FXCurrency1 <"Currency 1">
-//     [regulatoryReference MAS SFA MAS_2013 annex "1" table "IV" field "1.2"
-//     provision "The notional currency payable by specified person. Field value: ISO currency code."]
-//     FixedFloatLeg1 then
-// 	filter when InterestRatePayout -> rateSpecification -> fixedRate exists then
-// 	extract InterestRatePayout -> payoutQuantity -> assetIdentifier -> currency as "II.1.2 Notional currency leg 1"
+reporting rule FXCurrency1 <"Currency 1">
+    [regulatoryReference MAS SFA MAS_2013 annex "1" table "IV" field "1.2"
+    provision "The notional currency payable by specified person. Field value: ISO currency code."]
+    filter when rule IsFxPayout then
+    ContractForEvent then
+    extract Contract -> tradableProduct -> priceNotation -> price -> exchangeRate -> quotedCurrencyPair -> currency1 as "IV.1.2 Currency 1"
 
 // reporting rule FXNotionalAmount2 <"Notional amount 2">
 //     [regulatoryReference MAS SFA MAS_2013 annex "1" table "IV" field "1.3"
 //     provision "The notional amount of the second underlying currency. Field value: Any valid number."]
-//     filter when rule IsInterestRatePayout then
+//     filter when rule IsFxPayout then
 //     ContractForEvent then
-//     extract Contract -> tradableProduct -> quantityNotation -> quantity as "II.1.3 Notional amount leg 2"
+//     extract Contract -> tradableProduct -> quantityNotation -> quantity2 as "IV.1.3 Notional amount 2"
 
-// reporting rule FXCurrency2 <"Currency 2">
-//     [regulatoryReference MAS SFA MAS_2013 annex "1" table "IV" field "1.4"
-//     provision "The notional currency payable by the counterparty. Field value: ISO currency code."]
-//     FixedFloatLeg2 then
-// 	filter when InterestRatePayout -> rateSpecification -> floatingRate exists then
-// 	extract InterestRatePayout -> payoutQuantity -> assetIdentifier -> currency as "II.1.4 Notional currency leg 2"
+reporting rule FXCurrency2 <"Currency 2">
+    [regulatoryReference MAS SFA MAS_2013 annex "1" table "IV" field "1.4"
+    provision "The notional currency payable by the counterparty. Field value: ISO currency code."]
+    filter when rule IsFxPayout then
+    ContractForEvent then
+    extract Contract -> tradableProduct -> priceNotation -> price -> exchangeRate -> quotedCurrencyPair -> currency2 as "IV.1.4 Currency 2"
 
-// reporting rule FXExchangeRate <"Exchange Rate">
-//     [regulatoryReference MAS SFA MAS_2013 annex "1" table "IV" field "1.5"
-//     provision "The notional currency of leg 2 of the contract. Field value: Any valid number."]
-//     ContractForEvent then
-//     extract multiple
+reporting rule FXExchangeRate <"Exchange Rate">
+    [regulatoryReference MAS SFA MAS_2013 annex "1" table "IV" field "1.5"
+    provision "The exchange rate of the currencies of the contract. Field value: Any valid number. "]
+    filter when rule IsFxPayout then
+    ContractForEvent then
+    extract Contract -> tradableProduct -> priceNotation -> price -> exchangeRate -> rate as "IV.1.5 Exchange Rate"
