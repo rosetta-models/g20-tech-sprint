@@ -37,14 +37,8 @@
             },
             "partyContractInformation" : [ {
               "partyReference" : {
-                "value" : {
-                  "meta" : {
-                    "globalKey" : "108c78fb"
-                  },
-                  "partyId" : [ {
-                    "value" : "MP6I5ZYZBEU3UXPYFY54"
-                  } ]
-                }
+                "globalReference" : "108c78fb",
+                "externalReference" : "party1"
               },
               "relatedParty" : {
                 "role" : "REPORTING_PARTY"

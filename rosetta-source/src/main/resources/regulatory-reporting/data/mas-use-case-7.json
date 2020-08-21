@@ -130,6 +130,36 @@
               "product" : {
                 "contractualProduct" : {
                   "economicTerms" : {
+                    "effectiveDate" : {
+                      "adjustableDate" : {
+                        "meta" : {
+                          "globalKey" : "793cd9b"
+                        },
+                        "unadjustedDate" : {
+                          "day" : 5,
+                          "month" : 12,
+                          "year" : 2002
+                        }
+                      },
+                      "meta" : {
+                        "globalKey" : "eae5e5c5"
+                      }
+                    },
+                    "terminationDate" : {
+                      "adjustableDate" : {
+                        "meta" : {
+                          "globalKey" : "798a59b"
+                        },
+                        "unadjustedDate" : {
+                          "day" : 5,
+                          "month" : 12,
+                          "year" : 2007
+                        }
+                      },
+                      "meta" : {
+                        "globalKey" : "eb7c0dc5"
+                      }
+                    },
                     "payout" : {
                       "forwardPayout" : [ {
                         "settlementTerms" : {

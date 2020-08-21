@@ -17,11 +17,11 @@
         "input": "mas-use-case-3.json"
       },
       {
-        "name": "Upsize Credit Default Swap Trade",
+        "name": "Upsize Interest Rate Swap Trade",
         "input": "mas-use-case-4.json"
       },
       {
-        "name": "Novation Credit Default Swap Trade",
+        "name": "Novation Interest Rate Swap Trade",
         "input": "mas-use-case-6.json"
       },
       {

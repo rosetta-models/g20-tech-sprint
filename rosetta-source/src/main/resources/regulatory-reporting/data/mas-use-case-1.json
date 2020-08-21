@@ -85,22 +85,13 @@
                 } ],
                 "partyContractInformation" : [ {
                   "partyReference" : {
-                    "value" : {
-                      "meta" : {
-                        "globalKey" : "9da32cae"
-                      },
-                      "partyId" : [ {
-                        "value" : "54930084UKLVMY22DS16"
-                      } ]
-                    }
+                    "globalReference" : "9da32cae",
+                    "externalReference" : "party1"
                   },
                   "relatedParty" : {
                     "partyReference" : {
-                        "value" : {
-                          "meta" : {
-                            "globalKey" : "9da32cae"
-                            } 
-                          }                     
+                      "globalReference" : "9da32cae",
+                      "externalReference" : "party1"
                     },
                     "role" : "REPORTING_PARTY"
                   }
