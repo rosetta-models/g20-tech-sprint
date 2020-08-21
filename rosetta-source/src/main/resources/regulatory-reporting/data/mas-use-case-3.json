@@ -112,7 +112,7 @@
                 },
                 "price" : {
                   "floatingInterestRate" : {
-                    "spread" : 0.042
+                    "initialRate" : 0.042
                   }
                 }
               } ],

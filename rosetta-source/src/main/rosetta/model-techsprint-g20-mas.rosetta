@@ -26,9 +26,9 @@ when BookedInSingapore
 with fields 
     UniqueTransactionIdentifier
     UniqueProductIdentifier
-    // PriorUniqueTransactionIdentifier
-    // Counterparty1
-    // Counterparty2
+    PriorUniqueTransactionIdentifier 
+    Counterparty1
+    Counterparty2
     ReportingEntity
     Cleared
     ClearedEntity
@@ -84,29 +84,30 @@ reporting rule IsFixedFloat
 	extract Contract -> tradableProduct -> product -> contractualProduct -> economicTerms -> payout -> interestRatePayout -> rateSpecification -> fixedRate count = 1
 	and Contract -> tradableProduct -> product -> contractualProduct -> economicTerms -> payout -> interestRatePayout -> rateSpecification -> floatingRate count = 1
 
-// reporting rule InterestRatePayoutPayer
-//     ContractForEvent then
-// 	filter when rule IsFixedFloat then
-// 	filter when Contract->tradableProduct -> product -> contractualProduct -> economicTerms -> payout -> interestRatePayout -> rateSpecification -> fixedRate exists then
-// 	extract Contract -> tradableProduct then
-// 	(
-// 		extract multiple TradableProduct -> counterparties,
-// 		extract multiple TradableProduct -> product -> contractualProduct -> economicTerms -> payout -> interestRatePayout -> payerReceiver
-//     	) then
-// 	join key Counterparty -> counterparty foreignKey PayerReceiver -> payer then
-// 	extract Counterparty -> party
+reporting rule InterestRatePayoutPayer
+    ContractForEvent then
+	filter when rule IsFixedFloat then
+	filter when Contract->tradableProduct -> product -> contractualProduct -> economicTerms -> payout -> interestRatePayout -> rateSpecification -> fixedRate exists then
+	extract Contract -> tradableProduct then
+	(
+		extract multiple TradableProduct -> counterparties,
+		extract multiple TradableProduct -> product -> contractualProduct -> economicTerms -> payout -> interestRatePayout -> payerReceiver
+    ) then
+    
+	join key Counterparty -> counterparty foreignKey PayerReceiver -> payer then
+	extract Counterparty -> party
 
-// reporting rule InterestRatePayoutReceiver
-//     ContractForEvent then
-// 	filter when rule IsFixedFloat then
-// 	filter when Contract->tradableProduct -> product -> contractualProduct -> economicTerms -> payout -> interestRatePayout -> rateSpecification -> fixedRate exists then
-// 	extract Contract -> tradableProduct then
-// 	(
-// 		extract multiple TradableProduct -> counterparties,
-// 		extract multiple TradableProduct -> product -> contractualProduct -> economicTerms -> payout -> interestRatePayout -> payerReceiver
-//     	) then
-// 	join key Counterparty -> counterparty foreignKey PayerReceiver -> receiver then
-// 	extract Counterparty -> party
+reporting rule InterestRatePayoutReceiver
+    ContractForEvent then
+	filter when rule IsFixedFloat then
+	filter when Contract->tradableProduct -> product -> contractualProduct -> economicTerms -> payout -> interestRatePayout -> rateSpecification -> fixedRate exists then
+	extract Contract -> tradableProduct then
+	(
+		extract multiple TradableProduct -> counterparties,
+		extract multiple TradableProduct -> product -> contractualProduct -> economicTerms -> payout -> interestRatePayout -> payerReceiver
+    	) then
+	join key Counterparty -> counterparty foreignKey PayerReceiver -> receiver then 
+	extract Counterparty -> party
 
 reporting rule FixedFloatLeg1 <"Fixed Float Leg 1">
     [regulatoryReference MAS SFA MAS_2013 annex "1" table "II"
@@ -170,36 +171,33 @@ reporting rule UniqueProductIdentifier <"Unique product identifier (UPI)">
 	ContractForEvent then
 		extract Contract -> tradableProduct -> product -> contractualProduct -> productIdentification -> productQualifier as "I.1.2 UPI"
 
-//TODO fix bug and then add back in
-// reporting rule PriorUniqueTransactionIdentifier <"Previous UTI (where applicable)">
-//     [regulatoryReference MAS SFA MAS_2013 annex "1" table "I" field "1.3"
-//     provision "To denote the previous UTI relating to this contract. Field value: Alphanumeric string."]
-//     PriorVersion then
-//     extract Contract -> contractIdentifier -> assignedIdentifier -> identifier
-//     as "I.1.3 Prior UTI"
+reporting rule PriorUniqueTransactionIdentifier <"Previous UTI (where applicable)">
+    [regulatoryReference MAS SFA MAS_2013 annex "1" table "I" field "1.3"
+    provision "To denote the previous UTI relating to this contract. Field value: Alphanumeric string."]
+    PriorVersion then
+    extract Contract -> contractIdentifier -> assignedIdentifier -> identifier
+    as "I.1.3 Prior UTI"
 
-// reporting rule PriorVersion
-//  	extract
-//         if WorkflowStep -> businessEvent -> primitives -> quantityChange -> before -> contract  exists
-// 		then WorkflowStep -> businessEvent -> primitives -> quantityChange -> before -> contract
-// 	else if WorkflowStep -> businessEvent -> primitives -> termsChange -> before -> contract  exists
-// 		then WorkflowStep -> businessEvent -> primitives -> termsChange -> before -> contract
-// 	    else WorkflowStep -> businessEvent -> primitives -> quantityChange -> before -> contract
-//  	as "Contract3"
 
-// reporting rule Counterparty1 <"Identifier of reporting entity">
-//     [regulatoryReference MAS SFA MAS_2013 annex "1" table "I" field "2.1"
-//     provision "An identifier of counterparty 1. Where counterparty 1 is a specified person, to use LEI or pre‑LEI if LEI is not available. Where counterparty 1 is not a specified person, to use LEI or pre‑LEI if LEI is not available or, if counterparty 1 does not have any LEI or pre‑LEI, to use SWIFT BIC code, AVOX ID, any identifier issued by a licensed trade repository or licensed foreign trade repository, or client code. In the case of individuals, to use a client code. Field value: Alphanumeric string."]
-//     InterestRatePayoutPayer then
-// 		filter when Party -> partyId -> scheme = "iso17442" then
-// 		extract Party -> partyId as "I.2.1 Counterparty 1"
+reporting rule PriorVersion
+ 	extract
+        if WorkflowStep -> businessEvent -> primitives -> quantityChange -> before -> contract  exists
+		then WorkflowStep -> businessEvent -> primitives -> quantityChange -> before -> contract
+	else if WorkflowStep -> businessEvent -> primitives -> termsChange -> before -> contract  exists
+		then WorkflowStep -> businessEvent -> primitives -> termsChange -> before -> contract
+	    else WorkflowStep -> businessEvent -> primitives -> quantityChange -> before -> contract
 
-// reporting rule Counterparty2 <"Identifier of reporting entity">
-//     [regulatoryReference MAS SFA MAS_2013 annex "1" table "I" field "2.2"
-//     provision "An identifier of counterparty 2. Where counterparty 2 is a specified person, to use LEI or pre‑LEI if LEI is not available. Where counterparty 2 is not a specified person, to use LEI or pre‑LEI if LEI is not available or, if counterparty 2 does not have any LEI or pre‑LEI, to use SWIFT BIC code, AVOX ID, any identifier issued by a licensed trade repository or licensed foreign trade repository, or client code. In the case of individuals, to use a client code. Field value: Alphanumeric string."]
-//     InterestRatePayoutReceiver then
-// 		filter when Party -> partyId -> scheme = "iso17442" then
-// 		extract Party -> partyId as "I.2.2 Counterparty 2"
+reporting rule Counterparty1 <"Identifier of reporting entity">
+    [regulatoryReference MAS SFA MAS_2013 annex "1" table "I" field "2.1"
+    provision "An identifier of counterparty 1. Where counterparty 1 is a specified person, to use LEI or pre‑LEI if LEI is not available. Where counterparty 1 is not a specified person, to use LEI or pre‑LEI if LEI is not available or, if counterparty 1 does not have any LEI or pre‑LEI, to use SWIFT BIC code, AVOX ID, any identifier issued by a licensed trade repository or licensed foreign trade repository, or client code. In the case of individuals, to use a client code. Field value: Alphanumeric string."]
+    InterestRatePayoutPayer then
+		extract Party -> partyId as "I.2.1 Counterparty 1"
+
+reporting rule Counterparty2 <"Identifier of reporting entity">
+    [regulatoryReference MAS SFA MAS_2013 annex "1" table "I" field "2.2"
+    provision "An identifier of counterparty 2. Where counterparty 2 is a specified person, to use LEI or pre‑LEI if LEI is not available. Where counterparty 2 is not a specified person, to use LEI or pre‑LEI if LEI is not available or, if counterparty 2 does not have any LEI or pre‑LEI, to use SWIFT BIC code, AVOX ID, any identifier issued by a licensed trade repository or licensed foreign trade repository, or client code. In the case of individuals, to use a client code. Field value: Alphanumeric string."]
+    InterestRatePayoutReceiver then
+		extract Party -> partyId as "I.2.2 Counterparty 2"
 
 reporting rule ReportingEntity <"Identifier of reporting entity">
     [regulatoryReference MAS SFA MAS_2013 annex "1" table "I" field "2.3"
