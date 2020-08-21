@@ -27,7 +27,15 @@
       {
         "name": "Use case 6",
         "input": "mas-use-case-6.json"
-      }      
+      },
+      {
+        "name": "Use case 7",
+        "input": "mas-use-case-7.json"
+      },
+      {
+        "name": "Use case 8",
+        "input": "mas-use-case-8.json"
+      }    
     ]
   }
 ]
