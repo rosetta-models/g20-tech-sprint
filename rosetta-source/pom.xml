@@ -20,6 +20,12 @@
             <groupId>com.regnosys.rosetta</groupId>
             <artifactId>com.regnosys.rosetta</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.regnosys</groupId>
+            <artifactId>core-cdm-dependencies</artifactId>
+            <!-- The config.json for cdm core deps will use the latest CDM dep. We have some code that needs the CDM on the class path. We can remove this when that cod eis ported over to the CDM -->
+            <version>LATEST</version>
+        </dependency>
     </dependencies>
 
     <build>

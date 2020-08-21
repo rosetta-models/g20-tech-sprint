@@ -1,0 +1,286 @@
+{
+  "action" : "NEW",
+  "businessEvent" : {
+    "eventDate" : {
+      "day" : 15,
+      "month" : 6,
+      "year" : 2018
+    },
+    "eventQualifier" : "NewTrade",
+    "meta" : {
+      "globalKey" : "40a201a"
+    },
+    "primitives" : [ {
+      "contractFormation" : {
+        "after" : {
+          "contract" : {
+            "contractIdentifier" : [ {
+              "assignedIdentifier" : [ {
+                "identifier" : {
+                  "value" : "ABN1234",
+                  "meta" : {
+                    "scheme" : "http://www.abn-amro.com/fx/trade-id"
+                  }
+                }
+              } ],
+              "issuerReference" : {
+                "globalReference" : "cba13de6",
+                "externalReference" : "party1"
+              },
+              "meta" : {
+                "globalKey" : "e209ce4f"
+              }
+            }, {
+              "assignedIdentifier" : [ {
+                "identifier" : {
+                  "value" : "DB5678",
+                  "meta" : {
+                    "scheme" : "http://www.db.com/fx/trade-id"
+                  }
+                }
+              } ],
+              "issuerReference" : {
+                "globalReference" : "dc00dbe7",
+                "externalReference" : "party2"
+              },
+              "meta" : {
+                "globalKey" : "98aed2c0"
+              }
+            } ],
+            "meta" : {
+              "globalKey" : "2717a52b"
+            },
+            "party" : [ {
+              "meta" : {
+                "globalKey" : "cba13de6",
+                "externalKey" : "party1"
+              },
+              "partyId" : [ {
+                "value" : "BFXS5XCH7N0Y05NIXW11",
+                "meta" : {
+                  "scheme" : "http://www.fpml.org/coding-scheme/external/iso17442"
+                }
+              } ]
+            }, {
+              "meta" : {
+                "globalKey" : "dc00dbe7",
+                "externalKey" : "party2"
+              },
+              "partyId" : [ {
+                "value" : "213800QILIUD4ROSUO03",
+                "meta" : {
+                  "scheme" : "http://www.fpml.org/coding-scheme/external/iso17442"
+                }
+              } ]
+            } ],
+            "partyContractInformation" : [ {
+              "partyReference" : {
+                "value" : {
+                  "meta" : {
+                    "globalKey" : "cba13de6"
+                  },
+                  "partyId" : [ {
+                    "value" : "BFXS5XCH7N0Y05NIXW11"
+                  } ]
+                }
+              },
+              "relatedParty" : {
+                "partyReference" : {
+                    "value" : {
+                      "meta" : {
+                        "globalKey" : "cba13de6"
+                        } 
+                      }                     
+                },
+                "role" : "REPORTING_PARTY"
+              }
+            } ],
+            "tradableProduct" : {
+              "counterparties" : [ {
+                "counterparty" : "PARTY_1",
+                "party" : {
+                  "globalReference" : "dc00dbe7",
+                  "externalReference" : "party2"
+                }
+              }, {
+                "counterparty" : "PARTY_2",
+                "party" : {
+                  "globalReference" : "cba13de6",
+                  "externalReference" : "party1"
+                }
+              } ],
+              "priceNotation" : [ {
+                "price" : {
+                  "exchangeRate" : {
+                    "forwardPoints" : 0.0020,
+                    "quotedCurrencyPair" : {
+                      "currency1" : {
+                        "value" : "SGD"
+                      },
+                      "currency2" : {
+                        "value" : "AUD"
+                      },
+                      "quoteBasis" : "CURRENCY_2_PER_CURRENCY_1"
+                    },
+                    "rate" : 1.01185,
+                    "spotRate" : 1.00985
+                  }
+                }
+              } ],
+              "product" : {
+                "contractualProduct" : {
+                  "economicTerms" : {
+                    "payout" : {
+                      "forwardPayout" : [ {
+                        "settlementTerms" : {
+                          "meta" : {
+                            "globalKey" : "3f21cf"
+                          },
+                          "valueDate" : {
+                            "day" : 15,
+                            "month" : 7,
+                            "year" : 2020
+                          }
+                        },
+                        "underlier" : {
+                          "underlyingProduct" : {
+                            "foreignExchange" : {
+                              "exchangedCurrency1" : {
+                                "payoutQuantity" : {
+                                  "assetIdentifier" : {
+                                    "currency" : {
+                                      "value" : "SGD"
+                                    }
+                                  },
+                                  "meta" : {
+                                    "globalKey" : "14070"
+                                  }
+                                },
+                                "meta" : {
+                                  "globalKey" : "44cc6851"
+                                },
+                                "payerReceiver" : {
+                                  "payer" : "PARTY_1",
+                                  "receiver" : "PARTY_2"
+                                }
+                              },
+                              "exchangedCurrency2" : {
+                                "payoutQuantity" : {
+                                  "assetIdentifier" : {
+                                    "currency" : {
+                                      "value" : "AUD"
+                                    }
+                                  },
+                                  "meta" : {
+                                    "globalKey" : "fe90"
+                                  }
+                                },
+                                "meta" : {
+                                  "globalKey" : "db8eeecf"
+                                },
+                                "payerReceiver" : {
+                                  "payer" : "PARTY_2",
+                                  "receiver" : "PARTY_1"
+                                }
+                              }
+                            },
+                            "meta" : {
+                              "globalKey" : "9655e5e0"
+                            }
+                          }
+                        }
+                      } ]
+                    }
+                  },
+                  "productIdentification" : {
+                    "productQualifier" : "ForeignExchange"
+                  }
+                },
+                "meta" : {
+                  "globalKey" : "9b5439e8"
+                }
+              },
+              "quantityNotation" : [ {
+                "assetIdentifier" : {
+                  "currency" : {
+                    "value" : "SGD"
+                  }
+                },
+                "quantity" : {
+                  "amount" : 10000000
+                }
+              }, {
+                "assetIdentifier" : {
+                  "currency" : {
+                    "value" : "AUD"
+                  }
+                },
+                "quantity" : {
+                  "amount" : 10118500
+                }
+              } ]
+            },
+            "tradeDate" : {
+              "date" : {
+                "day" : 15,
+                "month" : 6,
+                "year" : 2020
+              },
+              "meta" : {
+                "globalKey" : "3f218f"
+              }
+            }
+          },
+          "meta" : {
+            "globalKey" : "aa65e6a"
+          }
+        }
+      }
+    } ]
+  },
+  "eventIdentifier" : [ {
+    "assignedIdentifier" : [ {
+      "identifier" : {
+        "value" : "0CH7N0Y05NABN1234"
+      },
+      "version" : 1
+    } ],
+    "issuerReference" : {
+      "globalReference" : "cba13de6",
+      "externalReference" : "party1"
+    },
+    "meta" : {
+      "globalKey" : "a972732e"
+    }
+  } ],
+  "meta" : {
+    "globalKey" : "4d0311b6"
+  },
+  "party" : [ {
+    "meta" : {
+      "globalKey" : "cba13de6",
+      "externalKey" : "party1"
+    },
+    "partyId" : [ {
+      "value" : "BFXS5XCH7N0Y05NIXW11",
+      "meta" : {
+        "scheme" : "http://www.fpml.org/coding-scheme/external/iso17442"
+      }
+    } ]
+  }, {
+    "meta" : {
+      "globalKey" : "dc00dbe7",
+      "externalKey" : "party2"
+    },
+    "partyId" : [ {
+      "value" : "213800QILIUD4ROSUO03",
+      "meta" : {
+        "scheme" : "http://www.fpml.org/coding-scheme/external/iso17442"
+      }
+    } ]
+  } ],
+  "timestamp" : [ {
+    "dateTime" : "2018-06-15T18:13:51Z",
+    "qualification" : "EVENT_CREATION_DATE_TIME"
+  } ]
+}
