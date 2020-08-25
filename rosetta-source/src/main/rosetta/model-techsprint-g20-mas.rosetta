@@ -10,6 +10,8 @@ import cdm.base.staticdata.asset.credit.*
 import cdm.base.staticdata.asset.common.*
 import cdm.base.staticdata.party.*
 
+//Test PROD g2001
+
 // https://www.mas.gov.sg/
 body Authority MAS <"The Monetary Authority of Singapore (MAS) is Singapore’s central bank and integrated financial regulator. MAS also works with the financial industry to develop Singapore as a dynamic international financial centre.">
 
