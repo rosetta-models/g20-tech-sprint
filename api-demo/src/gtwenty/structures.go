@@ -25,6 +25,20 @@ type Report struct {
 	Items []ReportItem
 }
 
+type ReportType2 struct {
+	Headers []string
+	Items   []string
+}
+
+type ReportItemType2 struct {
+	Items []string
+}
+
+type ReportType3 struct {
+	Headers []string
+	Reports []ReportItemType2
+}
+
 type ReportProcessList struct {
 	DataSetName       string   `json:"dataSetName"`
 	InputType         string   `json:"inputType"`

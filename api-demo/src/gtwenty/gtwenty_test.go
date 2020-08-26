@@ -1,7 +1,6 @@
 package gtwenty
 
 import (
-	"bufio"
 	"bytes"
 	"fmt"
 	"io"
@@ -16,7 +15,7 @@ type ClientMock struct {
 	body io.ReadCloser
 }
 
-func (c *ClientMock) Do(req *http.Request) (*http.Response, error) {
+func (c *ClientMock) Do(_ *http.Request) (*http.Response, error) {
 	return c.MockResponse(), nil
 }
 
@@ -24,41 +23,43 @@ func (c *ClientMock) MockResponse() *http.Response {
 	return &http.Response{Body: c.body}
 }
 
-func TestQuery1(t *testing.T) {
-	queryTester(t, "testdata/usecases1.json")
-}
-
-func TestQuery2(t *testing.T) {
-	queryTester(t, "testdata/usecases2.json")
+func TestQuery(t *testing.T) {
+	queryTester(t, "testdata/input-single.json", "testdata/output-single.json")
 }
 
 func TestTransform(t *testing.T) {
-	file := "test-output"
-	reportItems := UnmarshallReportItems("testdata/usecases2.json")
-	GenerateHtml(reportItems, "test", file, "data/")
-	actual, err := ioutil.ReadFile(file + ".html")
-	if err != nil {
-		t.Fatal(err)
+	file := "test-output.html"
+	reportItems := UnmarshallReportItems("testdata/input-all.json")
+	list := UnmarshallProcessList("../../input/mas-regulatory-reporting-data-descriptor.json")
+	reports := make([]Report, 0)
+	for i, v := range list[0].Data {
+		items := make([]ReportItem, 0)
+		items = append(items, reportItems[i])
+		reports = append(reports, Report{Name: v.Name,
+			Items: items})
 	}
-	expected, err := ioutil.ReadFile("testdata/template1.html")
-	if err != nil {
-		t.Fatal(err)
-	}
-	a := buildArrayOfWords(actual)
-	e := buildArrayOfWords(expected)
-	for i := 0; i < len(a); i++ {
-		t.Logf("comparing: %s with: %s", a[i], e[i])
-		if strings.TrimSpace(a[i]) != strings.TrimSpace(e[i]) {
-			t.Error(fmt.Sprintf("GenerateHtml() = %s, expected %s", a[i], e[i]))
+	GenerateHtml(reports, file, "data/template.html", "data/headers.txt")
+	actual := ReadFile(file)
+	expected := ReadFile("testdata/output-all.html")
+	a := BuildArrayOfLines(actual)
+	e := BuildArrayOfLines(expected)
+	for i, v := range e {
+		if i == len(a) {
+			t.Fatal(fmt.Sprintf("GenerateHtml() = nil, expected %s", v))
+		}
+		t.Logf("comparing: %s with: %s", a[i], v)
+		if strings.TrimSpace(a[i]) != strings.TrimSpace(v) {
+			t.Error(fmt.Sprintf("GenerateHtml() = %s, expected %s", a[i], v))
 		}
 	}
 }
 
 func TestReportsProcessList(t *testing.T) {
-	expected := UnmarshallReportItems("testdata/usecases1.json")
+	output := "testdata/output-single.json"
+	expected := UnmarshallReportItems(output)
 	list := UnmarshallProcessList("../../input/mas-regulatory-reporting-data-descriptor.json")
 	for _, v := range list[0].Data {
-		actual := Query(buildMock(t, "testdata/usecases1.json"), "../../input/"+v.Input)
+		actual := Query(buildMock(output), "../../input/"+v.Input)
 		t.Logf("comparing: %s with: %s", actual, expected)
 		if !reflect.DeepEqual(actual, expected) {
 			t.Error(fmt.Sprintf("Query() = %s, expected %s", actual, expected))
@@ -66,20 +67,17 @@ func TestReportsProcessList(t *testing.T) {
 	}
 }
 
-func queryTester(t *testing.T, useCase string) {
-	expected := UnmarshallReportItems(useCase)
-	actual := Query(buildMock(t, useCase), "testdata/input1.json")
+func queryTester(t *testing.T, input string, output string) {
+	expected := UnmarshallReportItems(output)
+	actual := Query(buildMock(output), input)
 	t.Logf("comparing: %s with: %s", actual, expected)
 	if !reflect.DeepEqual(actual, expected) {
 		t.Error(fmt.Sprintf("Query() = %s, expected %s", actual, expected))
 	}
 }
 
-func buildMock(t *testing.T, file string) RegnosysClient {
-	b, err := ioutil.ReadFile(file)
-	if err != nil {
-		t.Fatal(err)
-	}
+func buildMock(file string) RegnosysClient {
+	b := ReadFile(file)
 	mock := RegnosysClient{
 		Client: &ClientMock{
 			body: ioutil.NopCloser(bytes.NewReader(b)),
@@ -88,14 +86,4 @@ func buildMock(t *testing.T, file string) RegnosysClient {
 		Cookie: "",
 	}
 	return mock
-}
-
-func buildArrayOfWords(b []byte) []string {
-	var s []string
-	aReader := bufio.NewScanner(bytes.NewReader(b))
-	aReader.Split(bufio.ScanLines)
-	for aReader.Scan() {
-		s = append(s, aReader.Text())
-	}
-	return s
 }
