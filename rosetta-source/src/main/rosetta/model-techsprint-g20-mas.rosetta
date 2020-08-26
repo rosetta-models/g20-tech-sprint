@@ -25,7 +25,7 @@ segment part
 segment definitions 
 
 report MAS SFA MAS_2013 in T+2
-when ReportableProduct and NexusCompliant
+when ReportableProduct  and NexusCompliant
 with fields 
     UniqueTransactionIdentifier
     UniqueProductIdentifier
@@ -69,6 +69,8 @@ with fields
     FXExchangeRate
 
 eligibility rule NexusCompliant
+[regulatoryReference MAS SFA MAS_2013 part "1 " section "Citation and commencement"
+    provision "In these Regulations, unless the context otherwise requires; Booked in Singapore, Traded in Singapore"]
 (
     BookedInSingapore,
     TradedInSingapore
@@ -112,9 +114,16 @@ eligibility rule TraderAddressForUTI
         lookup TraderDetails Trader
 
 eligibility rule ReportableProduct
-		filter when rule HasContract
+[regulatoryReference MAS SFA MAS_2013 part "2" article "Specified derivatives contract" section "5"
+    provision "The following derivatives contracts are prescribed, under the definition of “specified derivatives contract” in section 124 of the Act, as specified derivatives contracts:
+            (a)	any interest rate derivatives contract which is traded in Singapore or booked in Singapore;
+            (b)	any credit derivatives contract which is traded in Singapore or booked in Singapore;
+            (c)	any foreign exchange derivatives contract which is traded in Singapore or booked in Singapore;
+            (d)	any commodity derivatives contract which is traded in Singapore or booked in Singapore;
+            (e)	any equity derivatives contract which is traded in Singapore or booked in Singapore."]
+		filter when rule HasDerivativesContract
 
-eligibility rule HasContract
+eligibility rule HasDerivativesContract
 		ContractForEvent then
 		extract Contract -> tradableProduct -> product -> contractualProduct exists
 
