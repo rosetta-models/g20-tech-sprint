@@ -1,4 +1,4 @@
-# G20 Tech Sprint 
+# The G20 TechSprint 2020 
 
 ## Proposal Title
 Consistent Regulatory Reporting via the Common Domain Model
