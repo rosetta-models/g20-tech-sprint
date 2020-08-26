@@ -1,0 +1,1043 @@
+[
+  {
+    "identifier": {
+      "regRegime": "MAS",
+      "mandates": [
+        "SFA",
+        "MAS_2013"
+      ],
+      "name": "MASSFA_MAS_2013",
+      "generatedJavaClassName": "cdm.techsprint.g20.mas.blueprint.MASSFA_MAS_2013Report"
+    },
+    "useCases": [
+      {
+        "useCase": "1",
+        "fields": [
+          {
+            "name": "I.1.1 UTI",
+            "value": "0ZCB8VD9IUTR-23618 ",
+            "issue": ""
+          },
+          {
+            "name": "I.1.2 UPI",
+            "value": "InterestRate_IRSwap_FixedFloat_PlainVanilla",
+            "issue": ""
+          },
+          {
+            "name": "I.2.3 Reporting Counterparty ID",
+            "value": "54930084UKLVMY22DS16",
+            "issue": ""
+          },
+          {
+            "name": "I.3.1 Cleared",
+            "value": "False",
+            "issue": ""
+          },
+          {
+            "name": "I.3.2 Identifier of Clearing Entity",
+            "value": "Out of scope",
+            "issue": ""
+          },
+          {
+            "name": "I.4.1 Effective Date",
+            "value": "2015-3-6",
+            "issue": ""
+          },
+          {
+            "name": "I.4.1 Termination Date",
+            "value": "2025-3-6",
+            "issue": ""
+          },
+          {
+            "name": "I.5 Reporting Timestamp",
+            "value": "2018-02-20T18:13:51Z[UTC]",
+            "issue": ""
+          },
+          {
+            "name": "I.6.1 Option Type",
+            "value": "N/A",
+            "issue": ""
+          },
+          {
+            "name": "I.6.2 Option Expiration Date",
+            "value": "N/A",
+            "issue": ""
+          },
+          {
+            "name": "I.6.3 Option Premium",
+            "value": "N/A",
+            "issue": ""
+          },
+          {
+            "name": "II.1.1 Notional amount leg 1",
+            "value": "10000000",
+            "issue": ""
+          },
+          {
+            "name": "II.1.2 Notional currency leg 1",
+            "value": "EUR",
+            "issue": ""
+          },
+          {
+            "name": "II.1.3 Notional amount leg 2",
+            "value": "10000000",
+            "issue": ""
+          },
+          {
+            "name": "II.1.4 Notional currency leg 2",
+            "value": "EUR",
+            "issue": ""
+          },
+          {
+            "name": "II.1.9 Rate leg 1",
+            "value": "0.006982",
+            "issue": ""
+          },
+          {
+            "name": "II.1.10 Rate of leg 2",
+            "value": "EUR-EURIBOR-Reuters",
+            "issue": ""
+          },
+          {
+            "name": "II.1.11 Payment frequency period leg 1",
+            "value": "Y",
+            "issue": ""
+          },
+          {
+            "name": "II.1.12 Payment frequency multiplier leg 1",
+            "value": "1",
+            "issue": ""
+          },
+          {
+            "name": "II.1.13 Payment frequency period leg 2",
+            "value": "M",
+            "issue": ""
+          },
+          {
+            "name": "II.1.14 Payment frequency multiplier leg 2",
+            "value": "6",
+            "issue": ""
+          },
+          {
+            "name": "II.1.15 Day count leg 1",
+            "value": "30/360",
+            "issue": ""
+          },
+          {
+            "name": "II.1.16 Day count leg 2",
+            "value": "ACT/360",
+            "issue": ""
+          },
+          {
+            "name": "II.1.17 Reset frequency period leg 1",
+            "value": "Y",
+            "issue": ""
+          },
+          {
+            "name": "II.1.18 Reset frequency multiplier leg 1",
+            "value": "1",
+            "issue": ""
+          },
+          {
+            "name": "II.1.19 Reset frequency period leg 2",
+            "value": "M",
+            "issue": ""
+          },
+          {
+            "name": "II.1.20 Reset frequency multiplier leg 2",
+            "value": "6",
+            "issue": ""
+          },
+          {
+            "name": "I.2.1 Counterparty 1",
+            "value": "48750084UKLVTR22DS78",
+            "issue": ""
+          },
+          {
+            "name": "I.2.2 Counterparty 2",
+            "value": "54930084UKLVMY22DS16",
+            "issue": ""
+          },
+          {
+            "name": "II.1.7 Payer leg 1",
+            "value": "48750084UKLVTR22DS78",
+            "issue": ""
+          },
+          {
+            "name": "II.1.8 Payer leg 2",
+            "value": "54930084UKLVMY22DS16",
+            "issue": ""
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "identifier": {
+      "regRegime": "MAS",
+      "mandates": [
+        "SFA",
+        "MAS_2013"
+      ],
+      "name": "MASSFA_MAS_2013",
+      "generatedJavaClassName": "cdm.techsprint.g20.mas.blueprint.MASSFA_MAS_2013Report"
+    },
+    "useCases": [
+      {
+        "useCase": "1",
+        "fields": [
+          {
+            "name": "I.1.1 UTI",
+            "value": "GUAMON5OX2SW-17625",
+            "issue": ""
+          },
+          {
+            "name": "I.1.2 UPI",
+            "value": "InterestRate_IRSwap_FixedFloat_ZeroCoupon",
+            "issue": ""
+          },
+          {
+            "name": "I.2.3 Reporting Counterparty ID",
+            "value": "549300GUAMON5OX2OO54",
+            "issue": ""
+          },
+          {
+            "name": "I.3.1 Cleared",
+            "value": "False",
+            "issue": ""
+          },
+          {
+            "name": "I.3.2 Identifier of Clearing Entity",
+            "value": "Out of scope",
+            "issue": ""
+          },
+          {
+            "name": "I.4.1 Effective Date",
+            "value": "2018-2-22",
+            "issue": ""
+          },
+          {
+            "name": "I.4.1 Termination Date",
+            "value": "2020-2-22",
+            "issue": ""
+          },
+          {
+            "name": "I.5 Reporting Timestamp",
+            "value": "2018-02-20T18:13:51Z[UTC]",
+            "issue": ""
+          },
+          {
+            "name": "I.6.1 Option Type",
+            "value": "N/A",
+            "issue": ""
+          },
+          {
+            "name": "I.6.2 Option Expiration Date",
+            "value": "N/A",
+            "issue": ""
+          },
+          {
+            "name": "I.6.3 Option Premium",
+            "value": "N/A",
+            "issue": ""
+          },
+          {
+            "name": "II.1.1 Notional amount leg 1",
+            "value": "100000",
+            "issue": ""
+          },
+          {
+            "name": "II.1.2 Notional currency leg 1",
+            "value": "GBP",
+            "issue": ""
+          },
+          {
+            "name": "II.1.3 Notional amount leg 2",
+            "value": "100000",
+            "issue": ""
+          },
+          {
+            "name": "II.1.4 Notional currency leg 2",
+            "value": "GBP",
+            "issue": ""
+          },
+          {
+            "name": "II.1.9 Rate leg 1",
+            "value": "0.03",
+            "issue": ""
+          },
+          {
+            "name": "II.1.10 Rate of leg 2",
+            "value": "GBP-LIBOR-ISDA",
+            "issue": ""
+          },
+          {
+            "name": "II.1.11 Payment frequency period leg 1",
+            "value": "T",
+            "issue": ""
+          },
+          {
+            "name": "II.1.12 Payment frequency multiplier leg 1",
+            "value": "1",
+            "issue": ""
+          },
+          {
+            "name": "II.1.13 Payment frequency period leg 2",
+            "value": "T",
+            "issue": ""
+          },
+          {
+            "name": "II.1.14 Payment frequency multiplier leg 2",
+            "value": "1",
+            "issue": ""
+          },
+          {
+            "name": "II.1.15 Day count leg 1",
+            "value": "30E/360",
+            "issue": ""
+          },
+          {
+            "name": "II.1.16 Day count leg 2",
+            "value": "ACT/360",
+            "issue": ""
+          },
+          {
+            "name": "II.1.17 Reset frequency period leg 1",
+            "value": "T",
+            "issue": ""
+          },
+          {
+            "name": "II.1.18 Reset frequency multiplier leg 1",
+            "value": "1",
+            "issue": ""
+          },
+          {
+            "name": "II.1.19 Reset frequency period leg 2",
+            "value": "M",
+            "issue": ""
+          },
+          {
+            "name": "II.1.20 Reset frequency multiplier leg 2",
+            "value": "3",
+            "issue": ""
+          },
+          {
+            "name": "I.2.1 Counterparty 1",
+            "value": "549300O6E2WAK3IAXE34",
+            "issue": ""
+          },
+          {
+            "name": "I.2.2 Counterparty 2",
+            "value": "549300GUAMON5OX2OO54",
+            "issue": ""
+          },
+          {
+            "name": "II.1.7 Payer leg 1",
+            "value": "549300O6E2WAK3IAXE34",
+            "issue": ""
+          },
+          {
+            "name": "II.1.8 Payer leg 2",
+            "value": "549300GUAMON5OX2OO54",
+            "issue": ""
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "identifier": {
+      "regRegime": "MAS",
+      "mandates": [
+        "SFA",
+        "MAS_2013"
+      ],
+      "name": "MASSFA_MAS_2013",
+      "generatedJavaClassName": "cdm.techsprint.g20.mas.blueprint.MASSFA_MAS_2013Report"
+    },
+    "useCases": [
+      {
+        "useCase": "1",
+        "fields": [
+          {
+            "name": "I.1.1 UTI",
+            "value": "YZBEU3UXPYTR-15452",
+            "issue": ""
+          },
+          {
+            "name": "I.1.2 UPI",
+            "value": "InterestRate_IRSwap_FixedFloat_ZeroCoupon",
+            "issue": ""
+          },
+          {
+            "name": "I.2.3 Reporting Counterparty ID",
+            "value": "MP6I5ZYZBEU3UXPYFY54",
+            "issue": ""
+          },
+          {
+            "name": "I.3.1 Cleared",
+            "value": "False",
+            "issue": ""
+          },
+          {
+            "name": "I.3.2 Identifier of Clearing Entity",
+            "value": "Out of scope",
+            "issue": ""
+          },
+          {
+            "name": "I.4.1 Effective Date",
+            "value": "2018-2-22",
+            "issue": ""
+          },
+          {
+            "name": "I.4.1 Termination Date",
+            "value": "2020-2-22",
+            "issue": ""
+          },
+          {
+            "name": "I.5 Reporting Timestamp",
+            "value": "2018-02-20T18:13:51Z[UTC]",
+            "issue": ""
+          },
+          {
+            "name": "I.6.1 Option Type",
+            "value": "N/A",
+            "issue": ""
+          },
+          {
+            "name": "I.6.2 Option Expiration Date",
+            "value": "N/A",
+            "issue": ""
+          },
+          {
+            "name": "I.6.3 Option Premium",
+            "value": "N/A",
+            "issue": ""
+          },
+          {
+            "name": "II.1.1 Notional amount leg 1",
+            "value": "100000",
+            "issue": ""
+          },
+          {
+            "name": "II.1.2 Notional currency leg 1",
+            "value": "GBP",
+            "issue": ""
+          },
+          {
+            "name": "II.1.3 Notional amount leg 2",
+            "value": "100000",
+            "issue": ""
+          },
+          {
+            "name": "II.1.4 Notional currency leg 2",
+            "value": "GBP",
+            "issue": ""
+          },
+          {
+            "name": "II.1.9 Rate leg 1",
+            "value": "0.02546",
+            "issue": ""
+          },
+          {
+            "name": "II.1.10 Rate of leg 2",
+            "value": "GBP-LIBOR-ISDA",
+            "issue": ""
+          },
+          {
+            "name": "II.1.11 Payment frequency period leg 1",
+            "value": "T",
+            "issue": ""
+          },
+          {
+            "name": "II.1.12 Payment frequency multiplier leg 1",
+            "value": "1",
+            "issue": ""
+          },
+          {
+            "name": "II.1.13 Payment frequency period leg 2",
+            "value": "T",
+            "issue": ""
+          },
+          {
+            "name": "II.1.14 Payment frequency multiplier leg 2",
+            "value": "1",
+            "issue": ""
+          },
+          {
+            "name": "II.1.15 Day count leg 1",
+            "value": "30E/360",
+            "issue": ""
+          },
+          {
+            "name": "II.1.16 Day count leg 2",
+            "value": "ACT/360",
+            "issue": ""
+          },
+          {
+            "name": "II.1.17 Reset frequency period leg 1",
+            "value": "T",
+            "issue": ""
+          },
+          {
+            "name": "II.1.18 Reset frequency multiplier leg 1",
+            "value": "1",
+            "issue": ""
+          },
+          {
+            "name": "II.1.19 Reset frequency period leg 2",
+            "value": "M",
+            "issue": ""
+          },
+          {
+            "name": "II.1.20 Reset frequency multiplier leg 2",
+            "value": "3",
+            "issue": ""
+          },
+          {
+            "name": "I.2.1 Counterparty 1",
+            "value": "EYKN6V0ZCB8VD9IULB80",
+            "issue": ""
+          },
+          {
+            "name": "I.2.2 Counterparty 2",
+            "value": "MP6I5ZYZBEU3UXPYFY54",
+            "issue": ""
+          },
+          {
+            "name": "II.1.7 Payer leg 1",
+            "value": "EYKN6V0ZCB8VD9IULB80",
+            "issue": ""
+          },
+          {
+            "name": "II.1.8 Payer leg 2",
+            "value": "MP6I5ZYZBEU3UXPYFY54",
+            "issue": ""
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "identifier": {
+      "regRegime": "MAS",
+      "mandates": [
+        "SFA",
+        "MAS_2013"
+      ],
+      "name": "MASSFA_MAS_2013",
+      "generatedJavaClassName": "cdm.techsprint.g20.mas.blueprint.MASSFA_MAS_2013Report"
+    },
+    "useCases": [
+      {
+        "useCase": "1",
+        "fields": [
+          {
+            "name": "I.1.1 UTI",
+            "value": "0ZCB8VD9IU00426D8TH-25894",
+            "issue": ""
+          },
+          {
+            "name": "I.1.2 UPI",
+            "value": "InterestRate_IRSwap_FixedFloat_ZeroCoupon",
+            "issue": ""
+          },
+          {
+            "name": "I.1.3 Prior UTI",
+            "value": "IRS833TH90",
+            "issue": ""
+          },
+          {
+            "name": "I.2.3 Reporting Counterparty ID",
+            "value": "EYKN6V0ZCB8VD9IULB80",
+            "issue": ""
+          },
+          {
+            "name": "I.3.1 Cleared",
+            "value": "False",
+            "issue": ""
+          },
+          {
+            "name": "I.3.2 Identifier of Clearing Entity",
+            "value": "Out of scope",
+            "issue": ""
+          },
+          {
+            "name": "I.4.1 Effective Date",
+            "value": "2018-2-22",
+            "issue": ""
+          },
+          {
+            "name": "I.4.1 Termination Date",
+            "value": "2020-2-22",
+            "issue": ""
+          },
+          {
+            "name": "I.5 Reporting Timestamp",
+            "value": "2018-03-14T18:13:51Z[UTC]",
+            "issue": ""
+          },
+          {
+            "name": "I.6.1 Option Type",
+            "value": "N/A",
+            "issue": ""
+          },
+          {
+            "name": "I.6.2 Option Expiration Date",
+            "value": "N/A",
+            "issue": ""
+          },
+          {
+            "name": "I.6.3 Option Premium",
+            "value": "N/A",
+            "issue": ""
+          },
+          {
+            "name": "II.1.1 Notional amount leg 1",
+            "value": "55860.23",
+            "issue": ""
+          },
+          {
+            "name": "II.1.2 Notional currency leg 1",
+            "value": "GBP",
+            "issue": ""
+          },
+          {
+            "name": "II.1.3 Notional amount leg 2",
+            "value": "55860.23",
+            "issue": ""
+          },
+          {
+            "name": "II.1.4 Notional currency leg 2",
+            "value": "GBP",
+            "issue": ""
+          },
+          {
+            "name": "II.1.9 Rate leg 1",
+            "value": "0.05584",
+            "issue": ""
+          },
+          {
+            "name": "II.1.10 Rate of leg 2",
+            "value": "GBP-LIBOR-ISDA",
+            "issue": ""
+          },
+          {
+            "name": "II.1.11 Payment frequency period leg 1",
+            "value": "T",
+            "issue": ""
+          },
+          {
+            "name": "II.1.12 Payment frequency multiplier leg 1",
+            "value": "1",
+            "issue": ""
+          },
+          {
+            "name": "II.1.13 Payment frequency period leg 2",
+            "value": "T",
+            "issue": ""
+          },
+          {
+            "name": "II.1.14 Payment frequency multiplier leg 2",
+            "value": "1",
+            "issue": ""
+          },
+          {
+            "name": "II.1.15 Day count leg 1",
+            "value": "30E/360",
+            "issue": ""
+          },
+          {
+            "name": "II.1.16 Day count leg 2",
+            "value": "ACT/360",
+            "issue": ""
+          },
+          {
+            "name": "II.1.17 Reset frequency period leg 1",
+            "value": "T",
+            "issue": ""
+          },
+          {
+            "name": "II.1.18 Reset frequency multiplier leg 1",
+            "value": "1",
+            "issue": ""
+          },
+          {
+            "name": "II.1.19 Reset frequency period leg 2",
+            "value": "M",
+            "issue": ""
+          },
+          {
+            "name": "II.1.20 Reset frequency multiplier leg 2",
+            "value": "3",
+            "issue": ""
+          },
+          {
+            "name": "I.2.1 Counterparty 1",
+            "value": "MP6I5ZYZBEU3UXPYFY54",
+            "issue": ""
+          },
+          {
+            "name": "I.2.2 Counterparty 2",
+            "value": "EYKN6V0ZCB8VD9IULB80",
+            "issue": ""
+          },
+          {
+            "name": "II.1.7 Payer leg 1",
+            "value": "MP6I5ZYZBEU3UXPYFY54",
+            "issue": ""
+          },
+          {
+            "name": "II.1.8 Payer leg 2",
+            "value": "EYKN6V0ZCB8VD9IULB80",
+            "issue": ""
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "identifier": {
+      "regRegime": "MAS",
+      "mandates": [
+        "SFA",
+        "MAS_2013"
+      ],
+      "name": "MASSFA_MAS_2013",
+      "generatedJavaClassName": "cdm.techsprint.g20.mas.blueprint.MASSFA_MAS_2013Report"
+    },
+    "useCases": [
+      {
+        "useCase": "1",
+        "fields": [
+          {
+            "name": "I.1.1 UTI",
+            "value": "NOV-12345",
+            "issue": ""
+          },
+          {
+            "name": "I.1.2 UPI",
+            "value": "InterestRate_IRSwap_FixedFloat_PlainVanilla",
+            "issue": ""
+          },
+          {
+            "name": "I.1.3 Prior UTI",
+            "value": "UITD7895394",
+            "issue": ""
+          },
+          {
+            "name": "I.2.3 Reporting Counterparty ID",
+            "value": "54930084UKLVMY22DS16",
+            "issue": ""
+          },
+          {
+            "name": "I.3.1 Cleared",
+            "value": "False",
+            "issue": ""
+          },
+          {
+            "name": "I.3.2 Identifier of Clearing Entity",
+            "value": "Out of scope",
+            "issue": ""
+          },
+          {
+            "name": "I.4.1 Effective Date",
+            "value": "2015-3-6",
+            "issue": ""
+          },
+          {
+            "name": "I.4.1 Termination Date",
+            "value": "2025-3-6",
+            "issue": ""
+          },
+          {
+            "name": "I.5 Reporting Timestamp",
+            "value": "2018-05-21T18:13:51Z[UTC]",
+            "issue": ""
+          },
+          {
+            "name": "I.6.1 Option Type",
+            "value": "N/A",
+            "issue": ""
+          },
+          {
+            "name": "I.6.2 Option Expiration Date",
+            "value": "N/A",
+            "issue": ""
+          },
+          {
+            "name": "I.6.3 Option Premium",
+            "value": "N/A",
+            "issue": ""
+          },
+          {
+            "name": "II.1.1 Notional amount leg 1",
+            "value": "10000000",
+            "issue": ""
+          },
+          {
+            "name": "II.1.2 Notional currency leg 1",
+            "value": "EUR",
+            "issue": ""
+          },
+          {
+            "name": "II.1.3 Notional amount leg 2",
+            "value": "10000000",
+            "issue": ""
+          },
+          {
+            "name": "II.1.4 Notional currency leg 2",
+            "value": "EUR",
+            "issue": ""
+          },
+          {
+            "name": "II.1.9 Rate leg 1",
+            "value": "0.006982",
+            "issue": ""
+          },
+          {
+            "name": "II.1.10 Rate of leg 2",
+            "value": "EUR-EURIBOR-Reuters",
+            "issue": ""
+          },
+          {
+            "name": "II.1.11 Payment frequency period leg 1",
+            "value": "Y",
+            "issue": ""
+          },
+          {
+            "name": "II.1.12 Payment frequency multiplier leg 1",
+            "value": "1",
+            "issue": ""
+          },
+          {
+            "name": "II.1.13 Payment frequency period leg 2",
+            "value": "M",
+            "issue": ""
+          },
+          {
+            "name": "II.1.14 Payment frequency multiplier leg 2",
+            "value": "6",
+            "issue": ""
+          },
+          {
+            "name": "II.1.15 Day count leg 1",
+            "value": "30/360",
+            "issue": ""
+          },
+          {
+            "name": "II.1.16 Day count leg 2",
+            "value": "ACT/360",
+            "issue": ""
+          },
+          {
+            "name": "II.1.17 Reset frequency period leg 1",
+            "value": "Y",
+            "issue": ""
+          },
+          {
+            "name": "II.1.18 Reset frequency multiplier leg 1",
+            "value": "1",
+            "issue": ""
+          },
+          {
+            "name": "II.1.19 Reset frequency period leg 2",
+            "value": "M",
+            "issue": ""
+          },
+          {
+            "name": "II.1.20 Reset frequency multiplier leg 2",
+            "value": "6",
+            "issue": ""
+          },
+          {
+            "name": "I.2.1 Counterparty 1",
+            "value": "48750084UKLVTR22DS78",
+            "issue": ""
+          },
+          {
+            "name": "I.2.2 Counterparty 2",
+            "value": "54930084UKLVMY22DS16",
+            "issue": ""
+          },
+          {
+            "name": "II.1.7 Payer leg 1",
+            "value": "48750084UKLVTR22DS78",
+            "issue": ""
+          },
+          {
+            "name": "II.1.8 Payer leg 2",
+            "value": "54930084UKLVMY22DS16",
+            "issue": ""
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "identifier": {
+      "regRegime": "MAS",
+      "mandates": [
+        "SFA",
+        "MAS_2013"
+      ],
+      "name": "MASSFA_MAS_2013",
+      "generatedJavaClassName": "cdm.techsprint.g20.mas.blueprint.MASSFA_MAS_2013Report"
+    },
+    "useCases": [
+      {
+        "useCase": "1",
+        "fields": [
+          {
+            "name": "I.1.1 UTI",
+            "value": "0CH7N0Y05NABN1234",
+            "issue": ""
+          },
+          {
+            "name": "I.1.2 UPI",
+            "value": "ForeignExchange",
+            "issue": ""
+          },
+          {
+            "name": "I.2.3 Reporting Counterparty ID",
+            "value": "BFXS5XCH7N0Y05NIXW11",
+            "issue": ""
+          },
+          {
+            "name": "I.3.1 Cleared",
+            "value": "False",
+            "issue": ""
+          },
+          {
+            "name": "I.3.2 Identifier of Clearing Entity",
+            "value": "Out of scope",
+            "issue": ""
+          },
+          {
+            "name": "I.4.1 Effective Date",
+            "value": "2002-12-5",
+            "issue": ""
+          },
+          {
+            "name": "I.4.1 Termination Date",
+            "value": "2007-12-5",
+            "issue": ""
+          },
+          {
+            "name": "I.5 Reporting Timestamp",
+            "value": "2018-06-15T18:13:51Z[UTC]",
+            "issue": ""
+          },
+          {
+            "name": "I.6.1 Option Type",
+            "value": "N/A",
+            "issue": ""
+          },
+          {
+            "name": "I.6.2 Option Expiration Date",
+            "value": "N/A",
+            "issue": ""
+          },
+          {
+            "name": "I.6.3 Option Premium",
+            "value": "N/A",
+            "issue": ""
+          },
+          {
+            "name": "IV.1.2 Currency 1",
+            "value": "SGD",
+            "issue": ""
+          },
+          {
+            "name": "IV.1.4 Currency 2",
+            "value": "AUD",
+            "issue": ""
+          },
+          {
+            "name": "IV.1.5 Exchange Rate",
+            "value": "1.01185",
+            "issue": ""
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "identifier": {
+      "regRegime": "MAS",
+      "mandates": [
+        "SFA",
+        "MAS_2013"
+      ],
+      "name": "MASSFA_MAS_2013",
+      "generatedJavaClassName": "cdm.techsprint.g20.mas.blueprint.MASSFA_MAS_2013Report"
+    },
+    "useCases": [
+      {
+        "useCase": "1",
+        "fields": [
+          {
+            "name": "I.1.1 UTI",
+            "value": "VBWWV6BYQ0CH7N0Y0",
+            "issue": ""
+          },
+          {
+            "name": "I.1.2 UPI",
+            "value": "ForeignExchange_NDF",
+            "issue": ""
+          },
+          {
+            "name": "I.2.3 Reporting Counterparty ID",
+            "value": "549300VBWWV6BYQOWM67",
+            "issue": ""
+          },
+          {
+            "name": "I.3.1 Cleared",
+            "value": "False",
+            "issue": ""
+          },
+          {
+            "name": "I.3.2 Identifier of Clearing Entity",
+            "value": "Out of scope",
+            "issue": ""
+          },
+          {
+            "name": "I.5 Reporting Timestamp",
+            "value": "2020-01-09T11:37:17Z[UTC]",
+            "issue": ""
+          },
+          {
+            "name": "I.6.1 Option Type",
+            "value": "N/A",
+            "issue": ""
+          },
+          {
+            "name": "I.6.2 Option Expiration Date",
+            "value": "N/A",
+            "issue": ""
+          },
+          {
+            "name": "I.6.3 Option Premium",
+            "value": "N/A",
+            "issue": ""
+          },
+          {
+            "name": "IV.1.2 Currency 1",
+            "value": "USD",
+            "issue": ""
+          },
+          {
+            "name": "IV.1.4 Currency 2",
+            "value": "SGD",
+            "issue": ""
+          },
+          {
+            "name": "IV.1.5 Exchange Rate",
+            "value": "1.36",
+            "issue": ""
+          }
+        ]
+      }
+    ]
+  }
+]

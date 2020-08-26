@@ -38,6 +38,7 @@ func main() {
 	if len(list) < 1 {
 		log.Fatal("Empty list passed")
 	}
+	reports := make([]gtwenty.Report, 0)
 	for _, v := range list[0].Data {
 		client := gtwenty.RegnosysClient{
 			Client: &http.Client{},
@@ -46,6 +47,8 @@ func main() {
 			Cookie: *cookieFlag,
 		}
 		reportItems := gtwenty.Query(client, "input/"+v.Input)
-		gtwenty.GenerateHtml(reportItems, v.Name, "output/"+v.Input, "src/gtwenty/data/")
+		reports = append(reports, gtwenty.Report{Name: v.Name,
+			Items: reportItems})
 	}
+	gtwenty.GenerateHtml3(reports, "output/report.html", "src/gtwenty/data/template.html", "src/gtwenty/data/headers.txt")
 }

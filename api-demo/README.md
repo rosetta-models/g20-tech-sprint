@@ -21,4 +21,4 @@ Usage of `./apidemo`:
 
 ## Output
 
-This will produce a single HTML regulatory report: [Regulatory report](./output/mas-use-cases.html). 
+This will produce a single HTML regulatory report: [Regulatory report](./output/report.html). 
