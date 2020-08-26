@@ -21,8 +21,11 @@ corpus Regulations "SFA2001-S668-2013" MAS_2013 <"The Securities And Futures (Re
 
 corpus FAQ "13May2020|FAQ" FAQ <"These FAQs are to aid implementation of the reporting obligations and elaborate on MAS’ intent for some of the requirements set out under the SF(RDC)R.">
 
+segment part 
+segment definitions 
+
 report MAS SFA MAS_2013 in T+2
-when Nexus
+when ReportableProduct and NexusCompliant
 with fields 
     UniqueTransactionIdentifier
     UniqueProductIdentifier
@@ -38,8 +41,8 @@ with fields
     OptionType
     OptionExpirationDate
     OptionPremium
-    // BookingLocation
-    // TraderLocation
+    BookingLocation
+    TraderLocation
     InterestRateNotionalAmountLeg1
     InterestRateNotionalCurrencyLeg1
     InterestRateNotionalAmountLeg2
@@ -65,10 +68,64 @@ with fields
     FXCurrency2
     FXExchangeRate
 
-eligibility rule Nexus
-    // Dummy Rule
-     filter when WorkflowStep -> eventIdentifier  exists
-    //filter on Country or Trader of ReportingEntity (spreadsheet should contain two columns Booking Location, Trader Location: Mix up data so that some are Booking = SG, some are Trader = SG. some are neither)
+eligibility rule NexusCompliant
+(
+    BookedInSingapore,
+    TradedInSingapore
+)
+
+eligibility rule BookedInSingapore
+[regulatoryReference MAS SFA MAS_2013 part "1" definitions "2.1" section "Booked in Singapore"
+    provision "In relation to a derivatives contract, means the entry of the derivatives contract on the balance sheet or the profit and loss accounts of a person where —
+                (a)	the person is a party to the derivatives contract;
+                (b)	the person’s place of business is in Singapore; and
+                (c)	the balance sheet or the profit and loss accounts relates to the person’s business in Singapore"]
+			filter when rule ReportingPartyIsInSingapore
+
+eligibility rule TradedInSingapore
+[regulatoryReference MAS SFA MAS_2013 part "1" definitions "2.1" section "“Traded in Singapore"
+    provision "In relation to a derivatives contract, means the execution of the derivatives contract by a trader —
+                (a)	whose place of employment is located in Singapore and who conducts, on behalf of a specified person, activities relating to the execution of derivatives contracts in Singapore; or
+                (b)	who —
+                    (i)	for a period of not less than 30 days immediately before the date of the execution of the derivatives contract, conducts or is authorised to conduct, on behalf of a specified person, activities relating to the execution of derivatives contracts in Singapore; and
+                    (ii)	is physically in Singapore at the time of the execution of the derivatives contract."]
+			filter when rule TraderIsInSingapore
+
+eligibility rule TraderIsInSingapore
+		TraderAddressForUTI then
+        extract Trader -> placeOfEmployment then
+			IsAddressInSingapore
+
+eligibility rule ReportingPartyIsInSingapore
+		ContractForEvent then
+			BookingLocationAddress then
+			IsAddressInSingapore
+
+eligibility rule BookingLocationAddress
+        extract Contract -> partyContractInformation then
+        filter when PartyContractInformation -> relatedParty -> role = PartyRoleEnum -> ReportingParty then
+        extract PartyContractInformation -> partyReference then
+        lookup BookingLocation Address
+
+eligibility rule TraderAddressForUTI
+        extract WorkflowStep -> eventIdentifier -> assignedIdentifier then
+        lookup TraderDetails Trader
+
+eligibility rule ReportableProduct
+		filter when rule HasContract
+
+eligibility rule HasContract
+		ContractForEvent then
+		extract Contract -> tradableProduct -> product -> contractualProduct exists
+
+type Trader:
+    name string(1..1)
+    placeOfEmployment Address(1..1)
+    isAutharisedToTradeIsSingapore boolean (1..1)
+    currentLocation Address (1..1)
+
+eligibility rule IsAddressInSingapore
+    extract Address -> country = "SG"
 
 reporting rule ContractForEvent
  	extract
@@ -114,7 +171,6 @@ reporting rule InterestRatePayoutReceiver
 
 reporting rule FixedFloatLeg1 <"Fixed Float Leg 1">
     [regulatoryReference MAS SFA MAS_2013 annex "1" table "II"
-		rationale_author "DRR"
 		rationale "In case of fixed float swaps leg 1 is the fixed rate."
 		structured_provision "Leg 1 of a Fixed Float swap is by definition the Fixed leg"
 		provision ""]
@@ -133,7 +189,6 @@ reporting rule FixedFloatRateLeg1 <"Fixed Float Price">
 
 reporting rule FixedFloatLeg2 <"Fixed Float Leg 1">
     [regulatoryReference MAS SFA MAS_2013 annex "1" table "II"
-		rationale_author "DRR"
 		rationale "In case of fixed float swaps leg 2 is the floating rate."
 		structured_provision "Leg 2 of a Fixed Float swap is by definition the Floating leg"
 		provision ""]
@@ -145,7 +200,6 @@ reporting rule FixedFloatLeg2 <"Fixed Float Leg 1">
 
 reporting rule FixedFloatRateLeg2
     [regulatoryReference MAS SFA MAS_2013 annex "1" table "II" field "1.10"
-		rationale_author "DRR"
 		rationale "In case of fixed float the Price is the initial floating rate."
 		structured_provision "The Price of a Fixed Float swap is by definition the Floating leg"
 		provision "The rate used in leg 2, where applicable. Field value: Any valid number."]
@@ -209,10 +263,13 @@ reporting rule PriorVersion
 reporting rule ReportingEntity <"Identifier of reporting entity">
     [regulatoryReference MAS SFA MAS_2013 annex "1" table "I" field "2.3"
     provision "To denote the identity of the reporting entity.  To use LEI or pre‑LEI if LEI is not available.  Field value: Alphanumeric string."]
+	ReportingParty then extract Party -> partyId  as "I.2.3 Reporting Counterparty ID"
+
+reporting rule ReportingParty <"Identifier of reporting entity">
 	ContractForEvent then
 	extract Contract -> partyContractInformation then
 		filter when PartyContractInformation -> relatedParty -> role = PartyRoleEnum -> ReportingParty then
-			extract PartyContractInformation -> partyReference -> partyId as "I.2.3 Reporting Counterparty ID"
+			extract PartyContractInformation -> partyReference
 
 reporting rule Cleared <"Whether the contract has been cleared">
     [regulatoryReference MAS SFA MAS_2013 annex "1" table "I" field "3.1"
@@ -277,15 +334,16 @@ reporting rule OptionPremium <"Option premium">
     provision "The amount of option premium paid by the buyer to the seller for the reported contract. Field value: Any valid number."]
     return "N/A" as "I.6.3 Option Premium"
 
-// reporting rule BookingLocation <"Booking location">
-//     [regulatoryReference MAS SFA MAS_2013 annex "1" table "IA" field "6.1"
-//     provision "Where the contract is booked in Singapore, to use country code for Singapore “SG”. Where the contract is not booked in Singapore, to denote the country where the contract was booked. Field value: ISO 3166‑1 alpha‑2 country code."]
-//     input Reporting Entity LEI return value in spreadsheet as "IA.6.1 Booking Location"
+reporting rule BookingLocation <"Booking location">
+    [regulatoryReference MAS SFA MAS_2013 annex "1" table "IA" field "6.1"
+    provision "Where the contract is booked in Singapore, to use country code for Singapore “SG”. Where the contract is not booked in Singapore, to denote the country where the contract was booked. Field value: ISO 3166‑1 alpha‑2 country code."]
+    ContractForEvent then BookingLocationAddress then extract Address -> country
+     as "IA.6.1 Booking Location"
 
-// reporting rule TraderLocation <"Booking location">
-//     [regulatoryReference MAS SFA MAS_2013 annex "1" table "IA" field "6.2"
-//     provision "Where the contract is traded in Singapore, to use country code for Singapore “SG”. Where the contract is not booked in Singapore, to denote the country where the contract was booked. Field value: ISO 3166‑1 alpha‑2 country code."]
-//     input Reporting Entity LEI return value in spreadsheet as "IA.6.2 Booking Location"
+reporting rule TraderLocation <"Trader location">
+    [regulatoryReference MAS SFA MAS_2013 annex "1" table "IA" field "6.2"
+    provision "Where the contract is traded in Singapore, to use country code for Singapore “SG”. Where the contract is not traded in Singapore, to denote the country where the trader which executed the contract is located. Field value: ISO 3166‑1 alpha‑2 country code.."]
+    TraderAddressForUTI then extract Trader -> currentLocation -> country as "IA.6.2 Trader Location"
 
 // //how to associate the right quantity/price/currency with the right leg?
 reporting rule InterestRateNotionalAmountLeg1 <"Notional amount for leg 1">
