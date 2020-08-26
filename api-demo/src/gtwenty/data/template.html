@@ -1,0 +1,76 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <title>{{.Name}}</title>
+    <style type="text/css">
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        th, td {
+            padding: 0.25rem;
+            text-align: left;
+            border: 1px solid #ccc;
+        }
+    </style>
+</head>
+<body>
+<div>
+    <h1>Use Case Report Items</h1>
+    {{range .Items}}
+    <div>
+        <h2>{{.Identifier.Name}}</h2>
+        <table>
+            <thead>
+            <tr>
+                <th>Body</th>
+                <th>Corpus</th>
+                <th>Generated Java ClassName</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>{{.Identifier.RegRegime}}</td>
+                <td>
+                    {{range .Identifier.Mandates}}
+                        <span>{{.}}</span>
+                    {{end}}
+                </td>
+                <td>{{.Identifier.GeneratedJavaClassName}}</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div>
+        {{range .UseCases}}
+            <table>
+                <caption>
+                    <p>Use Case: {{.UseCase}}</p>
+                </caption>
+                <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Value</th>
+                    <th>Issue</th>
+                </tr>
+                </thead>
+                <tbody>
+                {{range .Fields}}
+                    <tr>
+                        <td>{{.Name}}</td>
+                        <td>{{.Value}}</td>
+                        <td>{{.Issue}}</td>
+                    </tr>
+                {{end}}
+                </tbody>
+            </table>
+        {{else}}
+            <div>No use case data</div>
+        {{end}}
+    </div>
+</div>
+{{else}}
+    <div>No data</div>
+{{end}}
+</body>
+</html>

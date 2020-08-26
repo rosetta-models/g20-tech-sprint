@@ -1,0 +1,37 @@
+[
+  {
+    "dataSetName": "G20 MAS",
+    "inputType": "org.isda.cdm.WorkflowStep",
+    "applicableReports": ["cdm.techsprint.g20.mas.blueprint.MASSFA_MAS_2013Report"],
+    "data": [
+      {
+        "name": "New Vanilla Interest Rate Swap Trade - No Floating Rate Spread",
+        "input": "mas-use-case-1.json"
+      },
+      {
+        "name": "New Zero Coupon Interest Rate Swap Trade - No Floating Rate Spread",
+        "input": "mas-use-case-2.json"
+      },
+      {
+        "name": "New Zero Coupon Interest Rate Swap Trade - with Floating Rate Spread",
+        "input": "mas-use-case-3.json"
+      },
+      {
+        "name": "Upsize Interest Rate Swap Trade",
+        "input": "mas-use-case-4.json"
+      },
+      {
+        "name": "Novation Interest Rate Swap Trade",
+        "input": "mas-use-case-6.json"
+      },
+      {
+        "name": "New FX Forward",
+        "input": "mas-use-case-7.json"
+      },
+      {
+        "name": "New Non-Deliverable Forward",
+        "input": "mas-use-case-8.json"
+      }    
+    ]
+  }
+]
