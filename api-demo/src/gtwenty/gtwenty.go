@@ -42,7 +42,7 @@ func Query(client RegnosysClient, input string) []ReportItem {
 	return reportItems
 }
 
-func GenerateHtml3(reports []Report, output string, templateFile string, headersFile string) {
+func GenerateHtml(reports []Report, output string, templateFile string, headersFile string) {
 	headers := BuildArrayOfLines(ReadFile(headersFile))
 	var templateReport ReportType3
 	templateReport.Headers = headers

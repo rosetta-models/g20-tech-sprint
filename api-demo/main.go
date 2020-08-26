@@ -50,5 +50,5 @@ func main() {
 		reports = append(reports, gtwenty.Report{Name: v.Name,
 			Items: reportItems})
 	}
-	gtwenty.GenerateHtml3(reports, "output/report.html", "src/gtwenty/data/template.html", "src/gtwenty/data/headers.txt")
+	gtwenty.GenerateHtml(reports, "output/report.html", "src/gtwenty/data/template.html", "src/gtwenty/data/headers.txt")
 }

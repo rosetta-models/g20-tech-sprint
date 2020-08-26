@@ -38,7 +38,7 @@ func TestTransform(t *testing.T) {
 		reports = append(reports, Report{Name: v.Name,
 			Items: items})
 	}
-	GenerateHtml3(reports, file, "data/template.html", "data/headers.txt")
+	GenerateHtml(reports, file, "data/template.html", "data/headers.txt")
 	actual := ReadFile(file)
 	expected := ReadFile("testdata/output-all.html")
 	a := BuildArrayOfLines(actual)
