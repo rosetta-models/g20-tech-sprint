@@ -21,8 +21,8 @@ corpus Regulations "SFA2001-S668-2013" MAS_2013 <"The Securities And Futures (Re
 
 corpus FAQ "13May2020|FAQ" FAQ <"These FAQs are to aid implementation of the reporting obligations and elaborate on MAS’ intent for some of the requirements set out under the SF(RDC)R.">
 
-segment part 
-segment definitions 
+segment part
+segment definitions
 
 report MAS SFA MAS_2013 in T+2
 when ReportableProduct  and NexusCompliant
@@ -62,11 +62,19 @@ with fields
     InterestRateResetFrequencyPeriodLeg2
     InterestRateResetFrequencyMultiplierLeg2
     InterestRatePrice
-    // FXNotionalAmount1
     FXCurrency1
-    // FXNotionalAmount2
     FXCurrency2
     FXExchangeRate
+
+eligibility rule ReportableProduct
+[regulatoryReference MAS SFA MAS_2013 part "2" article "Specified derivatives contract" section "5"
+    provision "The following derivatives contracts are prescribed, under the definition of “specified derivatives contract” in section 124 of the Act, as specified derivatives contracts:
+            (a)	any interest rate derivatives contract which is traded in Singapore or booked in Singapore;
+            (b)	any credit derivatives contract which is traded in Singapore or booked in Singapore;
+            (c)	any foreign exchange derivatives contract which is traded in Singapore or booked in Singapore;
+            (d)	any commodity derivatives contract which is traded in Singapore or booked in Singapore;
+            (e)	any equity derivatives contract which is traded in Singapore or booked in Singapore."]
+		filter when rule HasDerivativesContract
 
 eligibility rule NexusCompliant
 [regulatoryReference MAS SFA MAS_2013 part "1 " section "Citation and commencement"
@@ -112,16 +120,6 @@ eligibility rule BookingLocationAddress
 eligibility rule TraderAddressForUTI
         extract WorkflowStep -> eventIdentifier -> assignedIdentifier then
         lookup TraderDetails Trader
-
-eligibility rule ReportableProduct
-[regulatoryReference MAS SFA MAS_2013 part "2" article "Specified derivatives contract" section "5"
-    provision "The following derivatives contracts are prescribed, under the definition of “specified derivatives contract” in section 124 of the Act, as specified derivatives contracts:
-            (a)	any interest rate derivatives contract which is traded in Singapore or booked in Singapore;
-            (b)	any credit derivatives contract which is traded in Singapore or booked in Singapore;
-            (c)	any foreign exchange derivatives contract which is traded in Singapore or booked in Singapore;
-            (d)	any commodity derivatives contract which is traded in Singapore or booked in Singapore;
-            (e)	any equity derivatives contract which is traded in Singapore or booked in Singapore."]
-		filter when rule HasDerivativesContract
 
 eligibility rule HasDerivativesContract
 		ContractForEvent then
