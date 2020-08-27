@@ -1,0 +1,41 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <title>REGnosys Regulatory Report</title>
+    <style type="text/css">
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        th, td {
+            padding: 0.25rem;
+            text-align: left;
+            border: 1px solid #ccc;
+            white-space: nowrap;
+        }
+    </style>
+</head>
+<body>
+<div>
+    <h1>REGnosys Regulatory Report</h1>
+    <table>
+        <thead>
+            <tr>
+                {{- range .Headers}}
+                <th>{{.}}</th>
+                {{- end}}
+            </tr>
+        </thead>
+        <tbody>
+            {{- range .Reports}}
+            <tr>
+                {{- range .Items}}
+                <td>{{.}}</td>
+                {{- end}}
+            </tr>
+            {{- end}}
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

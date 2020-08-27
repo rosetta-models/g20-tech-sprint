@@ -21,11 +21,11 @@ corpus Regulations "SFA2001-S668-2013" MAS_2013 <"The Securities And Futures (Re
 
 corpus FAQ "13May2020|FAQ" FAQ <"These FAQs are to aid implementation of the reporting obligations and elaborate on MAS’ intent for some of the requirements set out under the SF(RDC)R.">
 
-segment part 
-segment definitions 
+segment part
+segment definitions
 
 report MAS SFA MAS_2013 in T+2
-when ReportableProduct // and NexusCompliant
+when ReportableProduct  and NexusCompliant
 with fields 
     UniqueTransactionIdentifier
     UniqueProductIdentifier
