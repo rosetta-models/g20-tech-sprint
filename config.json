@@ -3,7 +3,7 @@
   "name": "g20-tech-sprint",
   "description": "G20 Tech Sprint MAS Model",
   "modelPath": "rosetta-source/src/main",
-  "permissions": ["g20_tech_sprint_user"],
+  "permissions": [],
   "parent": "cdm",
   "parentReadOnly": true,
   "lowestVersion": "0.0.13",
