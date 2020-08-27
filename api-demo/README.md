@@ -9,13 +9,11 @@ The program processes 7 input json files. These are available to review here: [i
 ```go
 go test apidemo/src/gtwenty 
 go build
-./apidemo
+./apidemo -auth default-ro-api-key -project system/read-only-G20-TECH-SPRINT-0-1-0/latest/MAS/SFA/MAS_2013
 ```
 Usage of `./apidemo`:
 *  `-auth string`
     	The authorisation token
-*  `-cookie string`
-    	The affinity cookie. E.g. `ROSETTA_SESSION=0123456789.123.1234.123456`
 *  `-project string`
     	The username together with the project and report name. E.g. `joe.bloggs_auth0_123/g20/latest/MAS/SFA/MAS_2013`
 

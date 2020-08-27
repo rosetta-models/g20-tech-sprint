@@ -16,7 +16,7 @@ const URL = "https://g20techsprint.prod.rosetta-technology.io/api/promoted/reg-r
 func main() {
 	projectFlag := flag.String("project", "", "The username together with the project and report name. E.g. joe.bloggs_auth0_123/g20/latest/MAS/SFA/MAS_2013")
 	authFlag := flag.String("auth", "", "The authorisation token")
-	cookieFlag := flag.String("cookie", "", "The affinity cookie. E.g. ROSETTA_SESSION=0123456789.123.1234.123456")
+	cookieFlag := flag.String("cookie", "cookie", "The affinity cookie. E.g. ROSETTA_SESSION=0123456789.123.1234.123456")
 	flag.Parse()
 	empty := false
 	flag.VisitAll(func(f *flag.Flag) {
