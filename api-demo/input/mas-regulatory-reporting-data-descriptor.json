@@ -27,11 +27,7 @@
       {
         "name": "New FX Forward",
         "input": "mas-use-case-7.json"
-      },
-      {
-        "name": "New Non-Deliverable Forward",
-        "input": "mas-use-case-8.json"
-      }    
+      } 
     ]
   }
 ]
