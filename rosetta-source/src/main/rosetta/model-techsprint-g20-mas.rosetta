@@ -25,7 +25,7 @@ segment part
 segment definitions
 
 report MAS SFA MAS_2013 in T+2
-when ReportableProduct  and NexusCompliant
+when ReportableProduct and NexusCompliant
 with fields 
     UniqueTransactionIdentifier
     UniqueProductIdentifier
