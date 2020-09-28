@@ -10,6 +10,9 @@ import cdm.base.staticdata.asset.credit.*
 import cdm.base.staticdata.asset.common.*
 import cdm.base.staticdata.party.*
 
+import cdm.product.template.*
+import cdm.product.asset.*
+
 // https://www.mas.gov.sg/
 body Authority MAS <"The Monetary Authority of Singapore (MAS) is Singapore’s central bank and integrated financial regulator. MAS also works with the financial industry to develop Singapore as a dynamic international financial centre.">
 
@@ -157,7 +160,7 @@ reporting rule InterestRatePayoutPayer
 	filter when Contract->tradableProduct -> product -> contractualProduct -> economicTerms -> payout -> interestRatePayout -> rateSpecification -> fixedRate exists then
 	extract Contract -> tradableProduct then
 	(
-		extract multiple TradableProduct -> counterparties,
+		extract multiple cdm.product.template.TradableProduct -> counterparties,
 		extract multiple TradableProduct -> product -> contractualProduct -> economicTerms -> payout -> interestRatePayout -> payerReceiver
     ) then
 
