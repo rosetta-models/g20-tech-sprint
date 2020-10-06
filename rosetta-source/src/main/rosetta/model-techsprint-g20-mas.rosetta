@@ -29,7 +29,7 @@ segment part
 segment definitions
 
 report MAS SFA MAS_2013 in T+2
-when ReportableProduct and NexusCompliant
+when ReportableProduct // and NexusCompliant
 with fields 
     UniqueTransactionIdentifier
     UniqueProductIdentifier
@@ -45,8 +45,8 @@ with fields
     OptionType
     OptionExpirationDate
     OptionPremium
-    BookingLocation
-    TraderLocation
+    // BookingLocation
+    // TraderLocation
     InterestRateNotionalAmountLeg1
     InterestRateNotionalCurrencyLeg1
     InterestRateNotionalAmountLeg2
