@@ -1,3 +1,3 @@
-# G20 Tech Sprint 
+# G20 Tech Sprint - config PROD branch
 
 MAS Model
