@@ -9,6 +9,7 @@ import cdm.base.staticdata.asset.rates.*
 import cdm.base.staticdata.asset.credit.*
 import cdm.base.staticdata.asset.common.*
 import cdm.base.staticdata.party.*
+import cdm.legalagreement.contract.*
 
 import cdm.product.template.*
 import cdm.product.asset.*
@@ -29,7 +30,7 @@ segment part
 segment definitions
 
 report MAS SFA MAS_2013 in T+2
-when ReportableProduct and NexusCompliant
+when ReportableProduct // and NexusCompliant
 with fields 
     UniqueTransactionIdentifier
     UniqueProductIdentifier
@@ -45,8 +46,8 @@ with fields
     OptionType
     OptionExpirationDate
     OptionPremium
-    BookingLocation
-    TraderLocation
+    // BookingLocation
+    // TraderLocation
     InterestRateNotionalAmountLeg1
     InterestRateNotionalCurrencyLeg1
     InterestRateNotionalAmountLeg2
@@ -166,7 +167,7 @@ reporting rule InterestRatePayoutPayer
     ) then
 
 	join key Counterparty -> counterparty foreignKey PayerReceiver -> payer then
-	extract Counterparty -> party
+	extract Counterparty -> partyReference
 
 reporting rule InterestRatePayoutReceiver
     ContractForEvent then
@@ -178,7 +179,7 @@ reporting rule InterestRatePayoutReceiver
 		extract multiple TradableProduct -> product -> contractualProduct -> economicTerms -> payout -> interestRatePayout -> payerReceiver
     	) then
 	join key Counterparty -> counterparty foreignKey PayerReceiver -> receiver then
-	extract Counterparty -> party
+	extract Counterparty -> partyReference
 
 reporting rule FixedFloatLeg1 <"Fixed Float Leg 1">
     [regulatoryReference MAS SFA MAS_2013 annex "1" table "II"
