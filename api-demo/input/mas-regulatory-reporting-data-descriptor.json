@@ -1,7 +1,7 @@
 [
   {
     "dataSetName": "G20 MAS",
-    "inputType": "org.isda.cdm.WorkflowStep",
+    "inputType": "cdm.event.workflow.WorkflowStep",
     "applicableReports": ["cdm.techsprint.g20.mas.blueprint.MASSFA_MAS_2013Report"],
     "data": [
       {
