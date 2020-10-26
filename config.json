@@ -6,8 +6,8 @@
   "permissions": ["g20_tech_sprint_user"],
   "parent": "cdm",
   "parentReadOnly": true,
-  "lowestVersion": "0.1.3",
-   "upmostVersion": "0.1.3",
+  "lowestVersion": "0.2.0",
+   "upmostVersion": "0.2.0",
   "dependencyArtifact": {
     "groupId": "com.regnosys",
     "artifactId": "core-cdm-dependencies",
