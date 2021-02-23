@@ -1,6 +1,6 @@
 {
-  "id": "g20-tech-sprint",
-  "name": "g20-tech-sprint",
+  "id": "G20-TECH-SPRINT",
+  "name": "G20-TECH-SPRINT",
   "description": "G20 Tech Sprint MAS Model",
   "modelPath": "rosetta-source/src/main",
   "permissions": ["g20_tech_sprint_user"],
