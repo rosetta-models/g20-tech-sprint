@@ -4,23 +4,25 @@
   "description": "G20 Tech Sprint MAS Model",
   "modelPath": "rosetta-source/src/main",
   "permissions": ["g20_tech_sprint_user"],
-  "parent": "cdm",
-  "parentReadOnly": true,
   "lowestVersion": "0.2.0",
-   "upmostVersion": "0.2.0",
+  "upmostVersion": "0.2.0",
+  "parentReadOnly": true,
+  "parent": "cdm",
   "dependencyArtifact": {
     "groupId": "com.regnosys",
     "artifactId": "core-cdm-dependencies",
-    "version": "2.85.3"
+    "version": "2.85.3",
+    "exclusions": [
+      {
+        "groupId": "com.isda",
+        "artifactId": "cdm"
+      }
+    ]
   },
   "modelArtifacts": [
     {
       "groupId": "com.regnosys.g20-tech-sprint",
       "artifactId": "rosetta-source"
-    },
-    {
-      "groupId": "com.regnosys.g20-tech-sprint",
-      "artifactId": "lib"
     }
   ]
 }
